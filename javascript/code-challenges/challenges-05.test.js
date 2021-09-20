@@ -52,12 +52,15 @@ Write a function named addPurchases that, given an array of objects as input, us
 
 const addPurchases = (arr) => {
   // Solution code here...
-  let totalPrice = arr.reduce((previousValue, currentValue) => {
-    currentValue = previousValue.purchasePrice + currentValue.purchasePrice;
-    return currentValue;
-  });
+  // let totalPrice = arr.reduce((previousValue, currentValue) => {
+  //   currentValue = previousValue.purchasePrice + currentValue.purchasePrice;
+  //   return currentValue;
+  // }, 0);
 
-  return totalPrice;
+  // console.log(totalPrice, 'CONSOLE LOG');
+  return arr.reduce((accumulator, currentValue) => {
+    return accumulator += currentValue.purchasePrice;
+  }, 0);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -135,11 +138,10 @@ let starWarsData = [{
 
 const returnNames = (arr) => {
   // Solution code here...
-  const justNames = arr.reduce((character) => {
-    return [character.name];
-  });
-
-  return justNames;
+  return arr.reduce((accumulator, currentValue) => {
+    accumulator.push(currentValue.name);
+    return accumulator;
+  }, [] );
 };
 
 /* ------------------------------------------------------------------------------------------------
