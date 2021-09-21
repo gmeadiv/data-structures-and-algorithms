@@ -46,14 +46,15 @@ For example, containsAnd(['panda', 'ran', 'and']) returns ['panda', 'and'].
 
 const containsAnd = (arr) => {
   // Solution code here...
-  const containsAndArray = [];
-  const filterFunction = (term) => {
-    return arr.filter(function(word) {
-      return word.toLowerCase().indexOf(term.toLowerCase()) !== -1;
-    });
-  };
-  containsAndArray.push(filterFunction('and'));
-  return containsAndArray;
+  // const containsAndArray = [];
+  // const filterFunction = (term) => {
+  //   return arr.filter(function(word) {
+  //     return word.toLowerCase().indexOf(term.toLowerCase()) !== -1;
+  //   });
+  // };
+  // containsAndArray.push(filterFunction('and'));
+  // return containsAndArray;
+  return arr.filter(str => str.includes('and'));
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -83,16 +84,17 @@ For example, notInFirstArray([1,2,3], [1,2,3,4]) returns [4].
 
 const notInFirstArray = (forbiddenValues, arr) => {
   // Solution code here...
-  const sharedItems = forbiddenValues.filter(function(term) {
-    return (arr.indexOf(term) > -1);
-  });
-  const uniqueItemsArray = [];
-  let uniqueItem = undefined;
-  for (let i = 0; i < sharedItems.length; i++) {
-    if (uniqueItem === sharedItems[i]) {} else uniqueItemsArray.push(uniqueItem);
-  }
+  // const sharedItems = forbiddenValues.filter(function(term) {
+  //   return (arr.indexOf(term) > -1);
+  // });
+  // const uniqueItemsArray = [];
+  // let uniqueItem = undefined;
+  // for (let i = 0; i < sharedItems.length; i++) {
+  //   if (uniqueItem === sharedItems[i]) {} else uniqueItemsArray.push(uniqueItem);
+  // }
 
-  return uniqueItemsArray;
+  // return uniqueItemsArray;
+  return arr.filter(elem => !forbiddenValues.includes(elem));
 };
 
 /* ------------------------------------------------------------------------------------------------
