@@ -71,7 +71,7 @@ const howMuchPencil = (str) => {
   result.push(str, str.slice(''));
 
   console.log(result, '<--- CONSOLE LOG ----<<<');
-  return result;
+  // return result;
 };
 
 /* ------------------------------------------------------------------------------------------------
