@@ -129,7 +129,7 @@ const citiesAtoJ = (arr) => {
   // Solution code here...
   const regex = /\b[A-J]/;
   const regexArray = [];
-  regexArray.push(regex.sort(arr));
+  regexArray.push(regex.test(arr));
 
   console.log(regexArray, '<---- REGEX ARRAY LOG ---<<<');
   
