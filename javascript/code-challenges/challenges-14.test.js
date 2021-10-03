@@ -123,10 +123,11 @@ This data could be sorted by name or price.
 
 const sortBy = (property, arr) => {
   // Solution code here...
-  arr.sort((a, b) => {
+  const newArray = [];
+  newArray.push(arr.sort((a, b) => {
     a.price + b.price;
-  });
-  arr.sort();
+  }));
+  console.log(newArray, '<---- CONSOLE LOG ---<<<');
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -204,7 +205,7 @@ xdescribe('Testing challenge 3', () => {
   });
 });
 
-xdescribe('Testing challenge 4', () => {
+describe('Testing challenge 4', () => {
   test('It should sort items by a price', () => {
 
     expect(sortBy('price', [
@@ -233,7 +234,7 @@ xdescribe('Testing challenge 4', () => {
   });
 });
 
-describe('Testing challenge 5', () => {
+xdescribe('Testing challenge 5', () => {
   test('It should check if url is https', () => {
 
     expect(isSecure('http://www.insecure.com')).toBe(false);
