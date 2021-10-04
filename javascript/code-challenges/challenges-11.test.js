@@ -20,7 +20,16 @@ Becomes:
 
 function transformToLis(obj){
   // Solution code here...
-};
+  const htmlKeysArray = [];
+
+  console.log(obj.age > 0, '<---FIRST-<<<');
+
+  if (obj.age > 0) {
+    htmlKeysArray.push('<li>name: ' + obj.name + '</li>', '<li>age: ' + obj.age + '</li>');
+  }
+
+  return htmlKeysArray;
+}
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 2
@@ -34,17 +43,17 @@ For example, count(5, [[1, 3, 5, 7, 9], [5, 5, 5], [1, 2, 3]]) returns 4.
 
 const count = (target, input) => {
   // Solution code here...
-  let currentCount = 0;
+  let targetCounter = 0;
+  let totalCount = 0;
 
-  for (let i=0; i<input.length; i++) {
-    for (let j=0; j<input[i].length; j++) {
-      for (let k=0; k<input[j].length; k++) {
-        console.log(k, '<---- WHAT IS K LOG ---<<<');
-        if (k === target) {currentCount++;}
-      }
-    }
+  for (let i = 0; i < input.length; i++) {
+    input[i].map(number => {
+      if (number === target) {targetCounter++;}
+    });
+    totalCount = targetCounter;
   }
-  console.log(currentCount, '<---- CURRENT COUNT LOG ---<<<');
+
+  return totalCount;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -59,6 +68,15 @@ For example, [[1, 2, 3, 4, 5], [6, 7, 2, 4, 5, 7], [9, 2, 3, 6,]] returns 66.
 
 const totalSum = (input) => {
   // Solution code here...
+  let summedArray = [];
+  input.map(array => {
+    const sum = array.reduce((a, b) => { a = a + b; return a; }, 0);
+    summedArray.push(sum);
+  });
+
+  const totalSum = summedArray.reduce((a, b) => { a = a + b; return a; }, 0);
+
+  return totalSum;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -75,6 +93,17 @@ For example, [ [0,2,5,4], [2,4,10], [] ] should return [ [1, 32], [1024], [] ].
 
 const divisibleByFiveTwoToThePower = (input) => {
   // Solution code here...
+  let filteredArray = [];
+  input.map(array => {
+    array.map(element => {
+      if (element % 5 >= 1) {
+        filteredArray.push(Math.pow(2, element));
+      }
+      console.log(filteredArray, '<----<<<');
+    });
+  });
+
+  return filteredArray;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -141,6 +170,17 @@ let starWarsData = [{
 
 let findMaleAndFemale = (data) => {
   // Solution code here...
+  let characterGenderArray = [];
+
+  data.map(character => {
+    if (character.gender === 'male' || character.gender === 'female') {
+      let tempString = '';
+      tempString = character.name;
+      characterGenderArray.push(tempString);
+    }
+  });
+
+  return characterGenderArray.join(' and ');
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -151,6 +191,8 @@ Write a function named findShortest that, given the Star Wars data from Challeng
 
 let findShortest = (data) => {
   // Solution code here...
+  data.sort((a, b) => a.height - b.height);
+  return data[0].name;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -164,7 +206,7 @@ Run your tests from the console: jest challenges-10.test.js
 
 ------------------------------------------------------------------------------------------------ */
 
-xdescribe('Testing challenge 1', () => {
+describe('Testing challenge 1', () => {
   test('It should return a list of key value pairs inside of li tags', () => {
     expect(transformToLis({name: 'bob', age: 32})[0]).toStrictEqual(`<li>name: bob</li>`);
     expect(transformToLis({name: 'bob', age: 32})[1]).toStrictEqual(`<li>age: 32</li>`);
@@ -184,7 +226,7 @@ describe('Testing challenge 2', () => {
   });
 });
 
-xdescribe('Testing challenge 3', () => {
+describe('Testing challenge 3', () => {
   test('It should add all the numbers in the arrays', () => {
     const nums = [[1, 2, 3, 4, 5], [6, 7, 2, 4, 5, 7], [9, 2, 3, 6,]];
 
@@ -192,7 +234,7 @@ xdescribe('Testing challenge 3', () => {
   });
 });
 
-xdescribe('Testing challenge 4', () => {
+describe('Testing challenge 4', () => {
   test('It should return numbers divisible by five, then raise two to the power of the resulting numbers', () => {
     expect(divisibleByFiveTwoToThePower([[10, 20, 5, 4], [5, 6, 7, 9], [1, 10, 3]])).toStrictEqual([[1024, 1048576, 32], [32], [1024]]);
   });
@@ -206,14 +248,14 @@ xdescribe('Testing challenge 4', () => {
   });
 });
 
-xdescribe('Testing challenge 5', () => {
+describe('Testing challenge 5', () => {
   test('It should return only characters that are male or female', () => {
     expect(findMaleAndFemale(starWarsData)).toStrictEqual('Luke Skywalker and Darth Vader and Leia Organa');
     expect(findMaleAndFemale([{ name: 'person', gender: 'female' }, { gender: 'lol' }, { name: 'persontwo', gender: 'male' }])).toStrictEqual('person and persontwo');
   });
 });
 
-xdescribe('Testing challenge 6', () => {
+describe('Testing challenge 6', () => {
   test('It should return the name of the shortest character', () => {
     expect(findShortest(starWarsData)).toStrictEqual('R2-D2');
   });

@@ -10,7 +10,8 @@ E.g. [4,2,7,5,9,2] -> 9
 ------------------------------------------------------------------------------------------------ */
 const maxInArray = (arr) => {
   // Solution code here...
-  console.log(arr, '<---- CONSOLE LOG ---<<<');
+  const getMax = (a, b) => Math.max(a, b);
+  return arr.reduce(getMax);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -27,6 +28,11 @@ const courseInfo = { name: 'Code 301', duration: { dayTrack: '4 weeks', eveningT
 
 const getCourseKeys = (obj) => {
   // Solution code here...
+  const keyArray = [];
+  for (let key in obj) {
+    keyArray.push(key);
+  }
+  return keyArray;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -39,6 +45,11 @@ Write a function named checkValues that takes in an object and a value and retur
 
 const checkValues = (obj, value) => {
   // Solution code here...
+  let status = false;
+  if (obj.class === value) {
+    status = true;
+  }
+  return status;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -62,6 +73,13 @@ HR has asked you to change the data to make it easier to print so that it looks 
 
 const updateNumbers = (obj) => {
   // Solution code here...
+  const updatedArray = [];
+  let people = Object.keys(obj);
+  people.forEach(person => {
+    updatedArray.push(`${person}: ${obj[person]}`);
+  });
+
+  return updatedArray;
 };
 
 
@@ -118,6 +136,10 @@ const characters = [
 const getHouses = (arr) => {
   let houses = [];
   // Solution code here...
+  for (let i = 0; i < arr.length; i++) {
+    houses.push(arr[i].house);
+  }
+
   return houses;
 };
 
@@ -135,7 +157,13 @@ hasChildrenValues(characters, 'Sansa') will return false
 
 const hasChildrenValues = (arr, character) => {
   // Solution code here...
+  let status = false;
+  Object.values(arr).forEach(value => {
+    console.log(value.children === undefined);
+  });
 
+  console.log(status, '<-- FINAL STATUS--<<<');
+  // return status;
 };
 
 /* ------------------------------------------------------------------------------------------------
