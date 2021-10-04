@@ -24,12 +24,15 @@ For example, ['apple', 'banana', 'MacGyver'] returns ['Apple', 'Banana', 'MacGyv
 
 const toTitleCase = (arr) => {
   // Solution code here...
-  const capitalizedArray = [];
-  capitalizedArray.push(
-    arr.forEach(word => {
-      word.toUpperCase();
-    }));
-  console.log(capitalizedArray, '<---- CONSOLE LOG ---<<<');
+  let titleCasedArray = [];
+  let tempArray = [];
+  for (let i = 0; i < arr.length; i++) {
+    tempArray.push(...arr[i].split(''));
+    titleCasedArray.push(tempArray.splice(0, 1));
+    tempArray.splice(0, tempArray.length);
+  }
+  
+  console.log(titleCasedArray, '<---<<')
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -105,6 +108,16 @@ let starWarsData = [{
 
 let biggerThanLuke = (arr) => {
   // Solution code here...
+  let bigCharactersArray = [];
+
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i].mass > 77) {
+      let tempString = '';
+      tempString = arr[i].name;
+      bigCharactersArray.push(tempString);
+    }
+  }
+  return bigCharactersArray.join(' - ');
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -118,15 +131,17 @@ Here is an example of the input:
   {name: 'Tote bag', price: 15}
 ];
 
-This data could be sorted by name or price.
+This arr could be sorted by name or price.
 ------------------------------------------------------------------------------------------------ */
 
 const sortBy = (property, arr) => {
   // Solution code here...
-  arr.sort((a, b) => {
-    a.price + b.price;
+  sortedArray = [];
+  arr.map(item => {
+    item.find(property);
   });
-  arr.sort();
+  
+  console.log(arr, '<--arr', property, '<--property');
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -143,8 +158,11 @@ https:/missingslash.org returns false because the URL is malformed
 ------------------------------------------------------------------------------------------------ */
 const isSecure = (url) => {
   // Solution code here...
-  url.includes('https');
-  console.log(url)
+  let validURL = true;
+
+  if (!url.includes('https://')) {validURL = false;}
+
+  return validURL;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -168,6 +186,16 @@ Here is a sample board:
 
 const detectTicTacToeWin = (board) => {
   // Solution code here...
+  console.log(board, '<--BOARD')
+  let rowArray = [];
+  let columnArray = [];
+
+  board.map(row => {
+    rowArray.push(row);
+    columnArray.push(row[0], row[1], row[2]);
+  })
+
+  console.log(columnArray, '<--COLUMNS');
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -181,14 +209,14 @@ Run your tests from the console: jest challenge-14.test.js
 
 ------------------------------------------------------------------------------------------------ */
 
-xdescribe('Testing challenge 1', () => {
+describe('Testing challenge 1', () => {
   test('It should return a list of names', () => {
     const names = ['Mr. Brown', ' Ms. Red', 'Dr. Blue', 'Mrs.', '', 'Ms. Black', 'dr. Green', 'Mrs. Orange', 'Purple', 'Mr.  Pink'];
     expect(screenForNames(names)).toStrictEqual(['Mr. Brown', 'Dr. Blue', 'Ms. Black', 'Mrs. Orange']);
   });
 });
 
-xdescribe('Testing challenge 2', () => {
+describe('Testing challenge 2', () => {
   test('It should convert each word to title case', () => {
     const words = ['apple', 'banana', 'MacGyver'];
     expect(toTitleCase(words)).toStrictEqual(['Apple', 'Banana', 'MacGyver']);
@@ -197,14 +225,14 @@ xdescribe('Testing challenge 2', () => {
   });
 });
 
-xdescribe('Testing challenge 3', () => {
+describe('Testing challenge 3', () => {
   test('It should return only characters that are bigger than Luke', () => {
     expect(biggerThanLuke(starWarsData)).toStrictEqual('Darth Vader - Pex Kylar');
     expect(biggerThanLuke([])).toStrictEqual('');
   });
 });
 
-xdescribe('Testing challenge 4', () => {
+describe('Testing challenge 4', () => {
   test('It should sort items by a price', () => {
 
     expect(sortBy('price', [
@@ -242,7 +270,7 @@ describe('Testing challenge 5', () => {
   });
 });
 
-xdescribe('Testing challenge 6', () => {
+describe('Testing challenge 6', () => {
   test('It should return true if there are three in a row', () => {
     expect(detectTicTacToeWin([['X', '', 'O'], ['X', 'O', ''], ['X', 'O', 'X']])).toStrictEqual(true);
     expect(detectTicTacToeWin([['O', '', 'X'], ['X', 'O', 'X'], ['X', '', 'O']])).toStrictEqual(true);
