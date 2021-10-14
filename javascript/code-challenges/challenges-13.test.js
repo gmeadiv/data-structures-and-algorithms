@@ -8,6 +8,11 @@ Write a function named longestString that takes in an array of strings and retur
 
 const longestString = (arr) => {
 // Solution code here...
+  let longestWord = arr.reduce((longest, currentWord) => {
+    return currentWord.length > longest.length ? currentWord : longest;
+  }, '');
+  
+  return arr.indexOf(longestWord);
 };
   
 /* ------------------------------------------------------------------------------------------------
@@ -21,8 +26,10 @@ For example, ['this is great :)', 'wow', 'whyyyyyy :(', ':)))))'] returns ['t', 
 const firstLetters = (arr) => {
   // Solution code here...
   let slicedArray = [];
-  slicedArray.push(arr.map((arr, index) => {arr.slice()}));
-  console.log(slicedArray, '<---- CONSOLE LOG ---<<<');
+  arr.map(string => {
+    slicedArray.push(string.slice(0,1));
+  });
+  return slicedArray;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -35,8 +42,13 @@ For example, ['this is great :)', 'wow', 'whyyyyyy :(', ':)))))'] returns ['this
 
 const findHappiness = (arr) => {
   // Solution code here...
-  let foundHappiness = arr;
-  console.log(foundHappiness, '<---- CONSOLE LOG ---<<<');
+  let happyArray = [];
+  arr.map(string => {
+    if (string.includes(':)')) {
+      happyArray.push(string);
+    }
+  });
+  return happyArray;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -49,6 +61,20 @@ For example, (123) 456-7890 returns 1234567890
 
 const standardizePhoneNumbers = (arr) => {
   // Solution code here...
+  let standardizedArray = [];
+  arr.map(phoneNum => {
+    let tempArray = [];
+    phoneNum.split('').map(element => {
+      if (parseInt(element)) {
+        tempArray.push(element);
+      }
+    });
+    standardizedArray.push(tempArray.join(''));
+    tempArray.splice(0, tempArray.length);
+  });
+
+  console.log(standardizedArray, '<---TWO--<<<');
+  return standardizedArray;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -61,6 +87,13 @@ For example, 'abcdefg' returns 'bdf'
 
 const onlyOddChars = (str) => {
   // Solution code here...
+  let splitArray = [];
+  let oddsOnlyArray =[];
+  splitArray.push(...str.split(''));
+  for (let i = 0; i < splitArray.length; i++) {
+    console.log(splitArray[i], '<---<<');
+  }
+
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -71,6 +104,14 @@ Write a function named allHappy that takes in an array of strings and returns a 
 
 const allHappy = (arr) => {
   // Solution code here...
+  let isArrayHappy = true;
+
+  arr.map(string => {
+    if (!string.includes(':)')) {isArrayHappy = false}
+    return isArrayHappy;
+  });
+
+  return isArrayHappy;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -159,7 +200,7 @@ Run your tests from the console: jest challenges-13.test.js
 
 ------------------------------------------------------------------------------------------------ */
 
-xdescribe('Testing challenge 1', () => {
+describe('Testing challenge 1', () => {
   test('It should return an index position of the longest string', () => {
     const strArray1 = ['Ginger', 'Goose', 'Tangerine', 'Rosie', 'Mario', 'Malaki']
     const strArray2 = [];
@@ -171,7 +212,7 @@ xdescribe('Testing challenge 1', () => {
   });
 });
 
-xdescribe('Testing challenge 2', () => {
+describe('Testing challenge 2', () => {
   test('It should return the first letter of each element of the array', () => {
     const words = ['apple', 'banana', 'cantaloupe'];
 
@@ -192,7 +233,7 @@ describe('Testing challenge 3', () => {
   });
 });
 
-xdescribe('Testing challenge 4', () => {
+describe('Testing challenge 4', () => {
   test('It should return a standardized set of phone numbers', () => {
     const nums = ['(123) 456-7890', '(222) 222-2222'];
 
@@ -201,7 +242,7 @@ xdescribe('Testing challenge 4', () => {
   });
 });
 
-xdescribe('Testing challenge 5', () => {
+describe('Testing challenge 5', () => {
   test('It should only return the odd indexed characters from the string', () => {
     expect(onlyOddChars('0123456789')).toStrictEqual('13579');
     expect(onlyOddChars('abcd')).toStrictEqual('bd');
@@ -210,7 +251,7 @@ xdescribe('Testing challenge 5', () => {
   });
 });
 
-xdescribe('Testing challenge 6', () => {
+describe('Testing challenge 6', () => {
   test('It should correctly assess whether all the strings are happy', () => {
     const words = ['things', 'apple (:)', ':)banana', 'missing that thing', 'cant:)aloupe'];
 
