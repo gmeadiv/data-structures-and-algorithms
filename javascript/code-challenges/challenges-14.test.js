@@ -25,14 +25,11 @@ For example, ['apple', 'banana', 'MacGyver'] returns ['Apple', 'Banana', 'MacGyv
 const toTitleCase = (arr) => {
   // Solution code here...
   let titleCasedArray = [];
-  let tempArray = [];
-  for (let i = 0; i < arr.length; i++) {
-    tempArray.push(...arr[i].split(''));
-    titleCasedArray.push(tempArray.splice(0, 1));
-    tempArray.splice(0, tempArray.length);
-  }
-  
-  console.log(titleCasedArray, '<---<<')
+  arr.map(word => {
+    titleCasedArray.push(word.replace(/\b[a-z]/g, function() {return arguments[0].toUpperCase();}));
+  });
+
+  return titleCasedArray;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -136,12 +133,20 @@ This arr could be sorted by name or price.
 
 const sortBy = (property, arr) => {
   // Solution code here...
-  sortedArray = [];
-  arr.map(item => {
-    item.find(property);
-  });
-  
-  console.log(arr, '<--arr', property, '<--property');
+  // console.log(arr, '<--- ONE');
+
+  if (property === 'price') {
+    arr.sort((a, b) => {
+      console.log(b.price, '<--- PRICE');
+      b.price - a.price;
+    });
+  } else {
+    arr.sort((a, b) => {
+      console.log(b.name, '<--- NAME');
+    });
+  }
+   
+  // console.log(arr, '<--- TWO');
 };
 
 /* ------------------------------------------------------------------------------------------------
