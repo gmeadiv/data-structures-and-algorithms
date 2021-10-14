@@ -8,6 +8,12 @@ Write a function named longestString that takes in an array of strings and retur
 
 const longestString = (arr) => {
 // Solution code here...
+  let sortedArray = [];
+  sortedArray.push(...arr);
+
+  sortedArray.sort((a, b) => b.length - a.length);
+
+  return arr.indexOf(sortedArray[0]);
 };
   
 /* ------------------------------------------------------------------------------------------------
@@ -21,8 +27,10 @@ For example, ['this is great :)', 'wow', 'whyyyyyy :(', ':)))))'] returns ['t', 
 const firstLetters = (arr) => {
   // Solution code here...
   let slicedArray = [];
-  slicedArray.push(arr.map((arr, index) => {arr.slice()}));
-  console.log(slicedArray, '<---- CONSOLE LOG ---<<<');
+  arr.map(word => {
+    slicedArray.push(word.charAt(0));
+  });
+  return slicedArray;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -35,8 +43,11 @@ For example, ['this is great :)', 'wow', 'whyyyyyy :(', ':)))))'] returns ['this
 
 const findHappiness = (arr) => {
   // Solution code here...
-  let foundHappiness = arr;
-  console.log(foundHappiness, '<---- CONSOLE LOG ---<<<');
+  let happyArray = [];
+  arr.map(word => {
+    if (word.includes(':)') === true) {happyArray.push(word);}
+  });
+  return happyArray;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -49,6 +60,17 @@ For example, (123) 456-7890 returns 1234567890
 
 const standardizePhoneNumbers = (arr) => {
   // Solution code here...
+  let standardizedArray = [];
+
+  arr.map(phone => {
+    let tempArray = [];
+    tempArray.push(phone.substring(1,4));
+    tempArray.push(phone.substring(6,9));
+    tempArray.push(phone.substring(10,14));
+    standardizedArray.push(tempArray.join(''));
+  });
+
+  return standardizedArray;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -61,6 +83,21 @@ For example, 'abcdefg' returns 'bdf'
 
 const onlyOddChars = (str) => {
   // Solution code here...
+  let splitArray = [];
+  let oddArray = [];
+  let joinedArray = [];
+
+  splitArray.push(...str.split(''));
+
+  splitArray.map(element => {
+    if (str.indexOf(element) % 2 === 1) {
+      oddArray.push(element);
+    }
+  });
+
+  joinedArray.push(oddArray.join(''));
+
+  return joinedArray[0];
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -71,6 +108,10 @@ Write a function named allHappy that takes in an array of strings and returns a 
 
 const allHappy = (arr) => {
   // Solution code here...
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i].includes(':)')) {console.log('true')}
+    else {console.log('false')}
+  }
 };
 
 /* ------------------------------------------------------------------------------------------------
