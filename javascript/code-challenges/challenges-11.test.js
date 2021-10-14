@@ -95,12 +95,17 @@ const divisibleByFiveTwoToThePower = (input) => {
   // Solution code here...
   let filteredArray = [];
   input.map(array => {
+    let tempArray = [];
     array.map(element => {
-      if (element % 5 >= 1) {
-        filteredArray.push(Math.pow(2, element));
+      console.log(element, '<--- ELEMENT LOG ONE --<<<');
+      if (element % 5 === 1 || element % 5 === 2 || element % 5 === 3) {
+        console.log(element, '<--- ELEMENT LOG TWO --<<<');
+        tempArray.push(Math.pow(2, element));
+        // console.log(tempArray, '<--- TEMP ARRAY LOG --<<<');
       }
-      console.log(filteredArray, '<----<<<');
     });
+    filteredArray.push(...tempArray);
+    tempArray.splice(0, tempArray.length);
   });
 
   return filteredArray;

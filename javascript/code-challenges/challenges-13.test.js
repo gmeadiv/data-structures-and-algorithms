@@ -8,11 +8,12 @@ Write a function named longestString that takes in an array of strings and retur
 
 const longestString = (arr) => {
 // Solution code here...
-  let longestWord = arr.reduce((longest, currentWord) => {
-    return currentWord.length > longest.length ? currentWord : longest;
-  }, '');
-  
-  return arr.indexOf(longestWord);
+  let sortedArray = [];
+  sortedArray.push(...arr);
+
+  sortedArray.sort((a, b) => b.length - a.length);
+
+  return arr.indexOf(sortedArray[0]);
 };
   
 /* ------------------------------------------------------------------------------------------------
@@ -26,8 +27,8 @@ For example, ['this is great :)', 'wow', 'whyyyyyy :(', ':)))))'] returns ['t', 
 const firstLetters = (arr) => {
   // Solution code here...
   let slicedArray = [];
-  arr.map(string => {
-    slicedArray.push(string.slice(0,1));
+  arr.map(word => {
+    slicedArray.push(word.charAt(0));
   });
   return slicedArray;
 };
@@ -43,10 +44,8 @@ For example, ['this is great :)', 'wow', 'whyyyyyy :(', ':)))))'] returns ['this
 const findHappiness = (arr) => {
   // Solution code here...
   let happyArray = [];
-  arr.map(string => {
-    if (string.includes(':)')) {
-      happyArray.push(string);
-    }
+  arr.map(word => {
+    if (word.includes(':)') === true) {happyArray.push(word);}
   });
   return happyArray;
 };
@@ -62,18 +61,15 @@ For example, (123) 456-7890 returns 1234567890
 const standardizePhoneNumbers = (arr) => {
   // Solution code here...
   let standardizedArray = [];
-  arr.map(phoneNum => {
+  
+  arr.map(phone => {
     let tempArray = [];
-    phoneNum.split('').map(element => {
-      if (parseInt(element)) {
-        tempArray.push(element);
-      }
-    });
+    tempArray.push(phone.substring(1,4));
+    tempArray.push(phone.substring(6,9));
+    tempArray.push(phone.substring(10,14));
     standardizedArray.push(tempArray.join(''));
-    tempArray.splice(0, tempArray.length);
   });
 
-  console.log(standardizedArray, '<---TWO--<<<');
   return standardizedArray;
 };
 
@@ -88,12 +84,20 @@ For example, 'abcdefg' returns 'bdf'
 const onlyOddChars = (str) => {
   // Solution code here...
   let splitArray = [];
-  let oddsOnlyArray =[];
-  splitArray.push(...str.split(''));
-  for (let i = 0; i < splitArray.length; i++) {
-    console.log(splitArray[i], '<---<<');
-  }
+  let oddArray = [];
+  let joinedArray = [];
 
+  splitArray.push(...str.split(''));
+
+  splitArray.map(element => {
+    if (str.indexOf(element) % 2 === 1) {
+      oddArray.push(element);
+    }
+  });
+
+  joinedArray.push(oddArray.join(''));
+
+  return joinedArray[0];
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -104,14 +108,10 @@ Write a function named allHappy that takes in an array of strings and returns a 
 
 const allHappy = (arr) => {
   // Solution code here...
-  let isArrayHappy = true;
-
-  arr.map(string => {
-    if (!string.includes(':)')) {isArrayHappy = false}
-    return isArrayHappy;
-  });
-
-  return isArrayHappy;
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i].includes(':)')) {console.log('true')}
+    else {console.log('false')}
+  }
 };
 
 /* ------------------------------------------------------------------------------------------------
