@@ -139,7 +139,9 @@ const listFoods = (recipe) => {
   sortedIng.push(...recipe.ingredients.sort());
   // for (let i =0; i<sortedIng.length; i++)
 
-  console.log(sortedIng, '<--- SORTED ING LOG ----<<<');
+  sortedIng.map(ingredient => {
+    console.log(ingredient.join('.'));
+  });
 
   // return result;
 };
