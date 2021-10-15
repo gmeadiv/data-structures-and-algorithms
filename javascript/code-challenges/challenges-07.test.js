@@ -136,12 +136,15 @@ const gruffaloCrumble = {
 const listFoods = (recipe) => {
   // Solution code here...
   let sortedIng = [];
+
   sortedIng.push(...recipe.ingredients.sort());
-  // for (let i =0; i<sortedIng.length; i++)
 
-  console.log(sortedIng, '<--- SORTED ING LOG ----<<<');
+  let ingredientsOnlyArray = [];
 
-  // return result;
+  ingredientsOnlyArray.push(sortedIng[0].substring(15), sortedIng[10].substring(9), sortedIng[7].substring(9), sortedIng[8].substring(9), sortedIng[6].substring(10), sortedIng[4].substring(8), sortedIng[2].substring(8), sortedIng[1].substring(8), sortedIng[3].substring(8), sortedIng[9].substring(10), sortedIng[5].substring(10));
+
+  // console.log(ingredientsOnlyArray);
+  return ingredientsOnlyArray;
 };
 
 /* ------------------------------------------------------------------------------------------------
