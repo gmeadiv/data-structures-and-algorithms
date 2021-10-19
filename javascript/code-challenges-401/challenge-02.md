@@ -37,20 +37,21 @@ Insert new element into the middle of an array
 ### Pseudocode
 
 function insertShiftArray takes in an array and a value
-  declares an empty array
-  declares a valueToInsert that equals value argument
-  declares an index variable with intitial value of 0
 
-  if (ogArray.length / 2 === 0), then index = ogArray.length + 1
-  if (!ogArray.length / 2 === 0), then index = ogArray.length + 1.5
+- declares an empty array
+- declares a valueToInsert that equals value argument
+- declares an index variable with intitial value of 0
 
-  for-loop: i = 0; < .length + 1; i++
-    if (i < index), then newArray.push(ogArray[i])
-    else if (i === index), then newArray.push(valueToInsert, array[i])
-    else if (i > index), then newArray.push(array[i])
-    else console.log error
+- if (ogArray.length / 2 === 0), then index = ogArray.length + 1
+- if (!ogArray.length / 2 === 0), then index = ogArray.length + 1.5
 
-  return newArray
+- for-loop: i = 0; < .length + 1; i++
+  - if (i < index), then newArray.push(ogArray[i])
+  - else if (i === index), then newArray.push(valueToInsert, array[i])
+  - else if (i > index), then newArray.push(array[i])
+  - else console.log error
+
+- return newArray
 
 ### Visual Aid
 
