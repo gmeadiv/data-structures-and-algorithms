@@ -68,10 +68,11 @@ For example, if the input is 'Welcome', the output will be:
 const howMuchPencil = (str) => {
   let result = [];
   // Solution code here...
-  result.push(str, str.slice(''));
-
-  console.log(result, '<--- CONSOLE LOG ----<<<');
-  // return result;
+  for (let i = 0; i < str.length + 1; i++) {
+    result.push(str.slice(str.length - i));
+  }
+  result.reverse();
+  return result;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -88,8 +89,6 @@ const wordsToCharList = (arr) => {
   letterArray.push(...arr.split(''));
 
   return letterArray;
-
-  // console.log(letterArray, '<--- CONSOLE LOG ----<<<');
 };
 
 
@@ -135,9 +134,14 @@ const gruffaloCrumble = {
 
 
 const listFoods = (recipe) => {
-  let result = [];
   // Solution code here...
-  return result;
+  let sortedIng = [];
+  sortedIng.push(...recipe.ingredients.sort());
+  // for (let i =0; i<sortedIng.length; i++)
+
+  console.log(sortedIng, '<--- SORTED ING LOG ----<<<');
+
+  // return result;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -255,29 +259,28 @@ DO NOT CHANGE any of the below code.
 
 Run your tests from the console: jest challenges-05.test.js
 
------------------------------------------------------------------------------------------------- 
-DON'T FORGET TO TURN OF --WATCH!!!!*/
+*/
 
 describe('Testing challenge 1', () => {
   test('It should sort the star wars characters by height from tallest to shortest', () => {
     expect(sortStarWarsCharacters(starWarsPeople)[0]['name']).toStrictEqual('Luke Skywalker');
     expect(sortStarWarsCharacters(starWarsPeople)[2]['height']).toStrictEqual('96');
-  })
+  });
 });
 
-xdescribe('Testing challenge 2', () => {
+describe('Testing challenge 2', () => {
   test('It should return an array with three items removed', () => {
     expect(removeThree(2, [1, 2, 3, 4, 5, 6, 7, 8])).toStrictEqual([1, 2, 6, 7, 8]);
   });
 });
 
-xdescribe('Testing challenge 3', () => {
+describe('Testing challenge 3', () => {
   test('It should join an array', () => {
     expect(joinArray(['hello', '301', 'students'])).toStrictEqual('hello 301 students');
   });
 });
 
-xdescribe('Testing challenge 4', () => {
+describe('Testing challenge 4', () => {
   test('It should return a list of shortening words', () => {
     expect(howMuchPencil('Welcome')).toStrictEqual(['Welcome', 'elcome', 'lcome', 'come', 'ome', 'me', 'e', '']);
     expect(howMuchPencil('Welcome').length).toStrictEqual(8);
@@ -286,7 +289,7 @@ xdescribe('Testing challenge 4', () => {
   });
 });
 
-xdescribe('Testing challenge 5', () => {
+describe('Testing challenge 5', () => {
   test('It should return an array of individual letters', () => {
     expect(wordsToCharList('Gregor')).toStrictEqual(['G', 'r', 'e', 'g', 'o', 'r']);
     expect(wordsToCharList('Gregor').length).toStrictEqual(6);
@@ -295,7 +298,7 @@ xdescribe('Testing challenge 5', () => {
   });
 });
 
-xdescribe('Testing challenge 6', () => {
+describe('Testing challenge 6', () => {
   test('It should return a list of foods', () => {
     expect(listFoods(gruffaloCrumble)).toStrictEqual(['Gruffalo', 'oats', 'brown sugar', 'flour', 'pure maple syrup', 'chopped nuts', 'baking soda', 'baking powder', 'cinnamon', 'melted butter', 'fresh water']);
     expect(listFoods(gruffaloCrumble).length).toStrictEqual(11);
