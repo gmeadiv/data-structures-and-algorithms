@@ -58,7 +58,7 @@ const addPurchases = (arr) => {
   // }, 0);
 
   // console.log(totalPrice, 'CONSOLE LOG');
-  return arr.reduce((accumulator, currentValue) => {
+  return arr((accumulator, currentValue) => {
     return accumulator += currentValue.purchasePrice;
   }, 0);
 };
