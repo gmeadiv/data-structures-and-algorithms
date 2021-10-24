@@ -57,42 +57,46 @@ let findNode = (current, value) => {
 
 findNode(list.head, 22);
 
+let stringTheseNodes = (LinkedList) => {
 
-let nodeArray = [];
+  let nodeArray = [];
 
-let makeNodeArray = (current) => {
+  let makeNodeArray = (current) => {
 
-  if (current) {
+    if (current) {
 
-    if (current.value !== null) {
-      nodeArray.push(current.value);
+      if (current.value !== null) {
+        nodeArray.push(current.value);
+      }
+
+      makeNodeArray(current.next);
+
+    }
+  };
+
+  makeNodeArray(LinkedList.head);
+
+  let stringedNodeArray = [];
+
+  let stringifyNodes = (array) => {
+
+    for (let i = 0; i < array.length; i++) {
+      if (i === 0) {
+        stringedNodeArray.push(`{ ${array[i]} } -->`);
+      } else if (i > 0 && i < array.length - 1) {
+        stringedNodeArray.push(` { ${array[i]} } -->`);
+      } else if (i === (array.length - 1)) {
+        stringedNodeArray.push(` { ${array[i]} } --> NULL`);
+      }
     }
 
-    makeNodeArray(current.next);
+  };
 
-  }
+  stringifyNodes(nodeArray);
+
+  let stringedNodes = stringedNodeArray.join('');
+
+  return stringedNodes;
 };
 
-makeNodeArray(list.head);
-
-let stringedNodeArray = [];
-
-let stringifyNodes = (array) => {
-
-  for (let i = 0; i < array.length; i++) {
-    if (i === 0) {
-      stringedNodeArray.push(`{ ${array[i]} } -->`);
-    } else if (i > 0 && i < array.length - 1) {
-      stringedNodeArray.push(` { ${array[i]} } -->`);
-    } else if (i === (array.length - 1)) {
-      stringedNodeArray.push(` { ${array[i]} } --> NULL`);
-    }
-  }
-
-};
-
-stringifyNodes(nodeArray);
-
-let stringedNodes = stringedNodeArray.join('');
-
-return stringedNodes;
+stringTheseNodes(list);
