@@ -20,30 +20,38 @@ list.head.next = new Node(25);
 list.head.next.next = new Node(22);
 list.head.next.next.next = new Node(13);
 
-let findNode = (current, value) => {
+let hasNode = (list, value) => {
 
-  let hasNode;
+  let hasNode = false;
 
-  if (current) {
+  let findNode = (current, value) => {
 
-    findNode(current.next, value);
+    let status;
 
-    if (current.value === value) {
+    if (current) {
 
-      hasNode = true;
-      return hasNode;
+      findNode(current.next, value);
 
-    } else {
+      if (current.value === value) {
 
-      hasNode = false;
-      return hasNode;
+        status = current.value;
 
+      }
     }
 
-  }
+    if (status === value) {
+      hasNode = true;
+    }
+
+  };
+
+  findNode(list.head, value);
+
+  return hasNode;
 };
 
-findNode(list.head, 22);
+hasNode(list, 22);
+
 
 let stringTheseNodes = (LinkedList) => {
 
@@ -91,25 +99,36 @@ let stringTheseNodes = (LinkedList) => {
 
 stringTheseNodes(list);
 
-
-describe('Testing Find Node', () => {
+describe('Testing if list has a node', () => {
   test('It should return true if the linked list contains the input value, and false if not', () => {
+
     const testList = new LinkedList();
 
     testList.head = new Node(12);
-    testList.head.next = new Node('string');
+    testList.head.next = new Node('true');
     testList.head.next.next = new Node(8);
 
-    const falseValue = 404;
-    const trueValue = 12;
+    const falseValueOne = 404;
+    const falseValueTwo = 'false';
 
-    expect(findNode(testList, falseValue)).toBeFalsy();
-    expect(findNode(testList, trueValue)).toBeTruthy();
+    const trueValueOne = 12;
+    const trueValueTwo = 'true';
+    const trueValueThree = 8;
+
+
+    expect(hasNode(testList, falseValueOne)).toBeFalsy();
+    expect(hasNode(testList, falseValueTwo)).toBeFalsy();
+
+    expect(hasNode(testList, trueValueOne)).toBeTruthy();
+    expect(hasNode(testList, trueValueTwo)).toBeTruthy();
+    expect(hasNode(testList, trueValueThree)).toBeTruthy();
+
   });
 });
 
-describe('Testing Stringify Nodes', () => {
+describe('Testing if function strings nodes together', () => {
   test('It should return a string containing the values of the linked list', () => {
+
     const testList = new LinkedList();
 
     testList.head = new Node(12);
@@ -117,7 +136,6 @@ describe('Testing Stringify Nodes', () => {
     testList.head.next.next = new Node(8);
 
     expect(stringTheseNodes(testList)).toStrictEqual('{ 12 } --> { string } --> { 8 } --> NULL');
-    // expect(firstLetters(['a', 'b', 'c', 'd'])).toStrictEqual(['a', 'b', 'c', 'd']);
-    // expect(firstLetters([])).toStrictEqual([]);
+
   });
 });

@@ -6,4 +6,4 @@
 
 ## [Challenge Three: Searching Arrays By Index Number](./challenge-03.md)
 
-## [Challenge Five: Linked Lists](./challenge-05.js)
+## [Challenge Five: Linked Lists](./challenge-05.test.js)
