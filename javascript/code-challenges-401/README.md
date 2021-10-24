@@ -5,3 +5,5 @@
 ## [Challenge Two: Insert Elements Into an Array](./challenge-02.md)
 
 ## [Challenge Three: Searching Arrays By Index Number](./challenge-03.md)
+
+## [Challenge Five: Linked Lists](./challenge-05.md)
