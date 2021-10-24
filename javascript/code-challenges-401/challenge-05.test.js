@@ -20,37 +20,25 @@ list.head.next = new Node(25);
 list.head.next.next = new Node(22);
 list.head.next.next.next = new Node(13);
 
-console.log(list, '<-- LIST --<<');
-
-// const traverseIterative = (head) => {
-//   console.log(head);
-
-//   let current = head;
-
-//   console.log(head.next);
-
-//   while (current) {
-//     current = current.next;
-//   }
-// };
-
-// traverseIterative(list.head);
-
 let findNode = (current, value) => {
 
-  let hasNode = false;
+  let hasNode;
 
-  if (current && current.value === value) {
-
-    hasNode = true;
-
-    console.log(hasNode);
-
-  } else {
+  if (current) {
 
     findNode(current.next, value);
 
-    console.log(hasNode);
+    if (current.value === value) {
+
+      hasNode = true;
+      return hasNode;
+
+    } else {
+
+      hasNode = false;
+      return hasNode;
+
+    }
 
   }
 };
@@ -81,6 +69,7 @@ let stringTheseNodes = (LinkedList) => {
   let stringifyNodes = (array) => {
 
     for (let i = 0; i < array.length; i++) {
+
       if (i === 0) {
         stringedNodeArray.push(`{ ${array[i]} } -->`);
       } else if (i > 0 && i < array.length - 1) {
@@ -88,6 +77,7 @@ let stringTheseNodes = (LinkedList) => {
       } else if (i === (array.length - 1)) {
         stringedNodeArray.push(` { ${array[i]} } --> NULL`);
       }
+
     }
 
   };
@@ -100,3 +90,34 @@ let stringTheseNodes = (LinkedList) => {
 };
 
 stringTheseNodes(list);
+
+
+describe('Testing Find Node', () => {
+  test('It should return true if the linked list contains the input value, and false if not', () => {
+    const testList = new LinkedList();
+
+    testList.head = new Node(12);
+    testList.head.next = new Node('string');
+    testList.head.next.next = new Node(8);
+
+    const falseValue = 404;
+    const trueValue = 12;
+
+    expect(findNode(testList, falseValue)).toBeFalsy();
+    expect(findNode(testList, trueValue)).toBeTruthy();
+  });
+});
+
+describe('Testing Stringify Nodes', () => {
+  test('It should return a string containing the values of the linked list', () => {
+    const testList = new LinkedList();
+
+    testList.head = new Node(12);
+    testList.head.next = new Node('string');
+    testList.head.next.next = new Node(8);
+
+    expect(stringTheseNodes(testList)).toStrictEqual('{ 12 } --> { string } --> { 8 } --> NULL');
+    // expect(firstLetters(['a', 'b', 'c', 'd'])).toStrictEqual(['a', 'b', 'c', 'd']);
+    // expect(firstLetters([])).toStrictEqual([]);
+  });
+});
