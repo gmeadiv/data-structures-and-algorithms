@@ -17,40 +17,36 @@ const list = new LinkedList();
 
 const makeNode = (value) => {
 
-  if (!list.head) {list.head = new Node(value);}
+  if (!list.head) { list.head = new Node(value); }
 
   else if (list.head) {
 
     let current = list.head;
 
-    if (!current.next) {current.next = new Node(value);}
+    if (!current.next) { current.next = new Node(value); }
 
-    else {
+    else if (current.next) {
+
+      current = current.next;
 
       let nodeArray = [];
 
       let makeNodeArray = (node) => {
 
-        if (node.value) {
+        if (node.value !== null) {
           nodeArray.push(node.value);
-          }
-
           makeNodeArray(node.next);
         }
-      }; 
-      
-      makeNodeArray(current.next);
+
+      }; makeNodeArray(current.next);
 
       let nodeCount = nodeArray.length;
 
       current[nodeCount].next = new Node(value);
-      
     }
+  }
 
-  } 
-  
-  else {console.log('something went wrong with making a node');}
-;
+};
 
 // list.head = new Node(10);
 // list.head.next = new Node(25);
