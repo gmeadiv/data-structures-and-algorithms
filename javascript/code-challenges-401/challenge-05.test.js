@@ -13,12 +13,33 @@ class LinkedList {
   }
 }
 
-const list = new LinkedList();
+const makeNode = (value, list) => {
 
-list.head = new Node(10);
-list.head.next = new Node(25);
-list.head.next.next = new Node(22);
-list.head.next.next.next = new Node(13);
+  if (!list.head) {
+
+    list.head = new Node(value);
+
+  } else if (list.head) {
+
+    let current = list.head;
+
+    if (!current.next) {
+
+      current.next = new Node(value);
+
+    } else if (current.next) {
+
+      while (current.next !== null) {
+
+        current = current.next;
+
+      }
+
+      current.next = new Node(value);
+
+    }
+  }
+};
 
 let hasNode = (list, value) => {
 
@@ -49,9 +70,6 @@ let hasNode = (list, value) => {
 
   return hasNode;
 };
-
-hasNode(list, 22);
-
 
 let stringTheseNodes = (LinkedList) => {
 
@@ -97,16 +115,27 @@ let stringTheseNodes = (LinkedList) => {
   return stringedNodes;
 };
 
-stringTheseNodes(list);
+describe('Testing if list has a node', () => {
+  test('It should create three nodes', () => {
+
+    const testList = new LinkedList;
+
+
+    expect(makeNode(1, testList)).toBe();
+    expect(makeNode(2, testList)).toBe();
+    expect(makeNode(3, testList)).toBe();
+
+  });
+});
 
 describe('Testing if list has a node', () => {
   test('It should return true if the linked list contains the input value, and false if not', () => {
 
-    const testList = new LinkedList();
+    const testList = new LinkedList;
 
-    testList.head = new Node(12);
-    testList.head.next = new Node('true');
-    testList.head.next.next = new Node(8);
+    makeNode(12, testList);
+    makeNode('true', testList);
+    makeNode(8, testList);
 
     const falseValueOne = 404;
     const falseValueTwo = 'false';
@@ -129,13 +158,14 @@ describe('Testing if list has a node', () => {
 describe('Testing if function strings nodes together', () => {
   test('It should return a string containing the values of the linked list', () => {
 
-    const testList = new LinkedList();
+    const testList = new LinkedList;
 
-    testList.head = new Node(12);
-    testList.head.next = new Node('string');
-    testList.head.next.next = new Node(8);
+    makeNode('string', testList);
+    makeNode('these', testList);
+    makeNode(4, testList);
+    makeNode('nodes', testList);
 
-    expect(stringTheseNodes(testList)).toStrictEqual('{ 12 } --> { string } --> { 8 } --> NULL');
+    expect(stringTheseNodes(testList)).toStrictEqual('{ string } --> { these } --> { 4 } --> { nodes } --> NULL');
 
   });
 });

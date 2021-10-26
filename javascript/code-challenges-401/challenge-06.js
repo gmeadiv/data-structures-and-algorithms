@@ -17,70 +17,32 @@ const list = new LinkedList();
 
 const makeNode = (value) => {
 
-  if (!list.head) { list.head = new Node(value); }
+  if (!list.head) {
 
-  else if (list.head) {
+    list.head = new Node(value);
+
+  } else if (list.head) {
 
     let current = list.head;
 
-    if (!current.next) { current.next = new Node(value); }
+    if (!current.next) {
 
-    else if (current.next) {
+      current.next = new Node(value);
 
-      current = current.next;
+    } else if (current.next) {
 
-      let nodeArray = [];
+      while (current.next !== null) {
 
-      let makeNodeArray = (node) => {
-
-        if (node.value !== null) {
-          nodeArray.push(node.value);
-          makeNodeArray(node.next);
-        }
-
-      }; makeNodeArray(current.next);
-
-      let nodeCount = nodeArray.length;
-
-      current[nodeCount].next = new Node(value);
-    }
-  }
-
-};
-
-// list.head = new Node(10);
-// list.head.next = new Node(25);
-// list.head.next.next = new Node(22);
-// list.head.next.next.next = new Node(13);
-
-const hasNode = (list, value) => {
-
-  let hasNode = false;
-
-  let findNode = (current, value) => {
-
-    let status;
-
-    if (current) {
-
-      findNode(current.next, value);
-
-      if (current.value === value) {
-
-        status = current.value;
+        current = current.next;
 
       }
+
+      current.next = new Node(value);
+
     }
-
-    if (status === value) {
-      hasNode = true;
-    }
-
-  };
-
-  findNode(list.head, value);
-
-  return hasNode;
+  }
 };
 
-hasNode(list, 22);
+makeNode(1);
+
+module.export = {makeNode};
