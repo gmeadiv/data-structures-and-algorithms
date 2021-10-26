@@ -25,32 +25,32 @@ const makeNode = (value) => {
 
     if (!current.next) {current.next = new Node(value);}
 
-  }
+    else {
 
-  else {console.log('something went wrong with making a node');}
-};
+      let nodeArray = [];
 
-else {
+      let makeNodeArray = (node) => {
 
-  let nodeArray = [];
+        if (node.value) {
+          nodeArray.push(node.value);
+          }
 
-  let makeNodeArray = (node) => {
+          makeNodeArray(node.next);
+        }
+      }; 
+      
+      makeNodeArray(current.next);
 
-    if (node) {
+      let nodeCount = nodeArray.length;
 
-      if (node.value !== null) {
-        nodeArray.push(node.value);
-      }
-
-      makeNodeArray(node.next);
+      current[nodeCount].next = new Node(value);
+      
     }
-  }; makeNodeArray(current.next);
 
-  let nodeCount = nodeArray.length;
-
-
-  current[nodeCount].next = new Node(value);
-}
+  } 
+  
+  else {console.log('something went wrong with making a node');}
+;
 
 // list.head = new Node(10);
 // list.head.next = new Node(25);
