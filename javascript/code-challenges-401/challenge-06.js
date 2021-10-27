@@ -13,9 +13,7 @@ class LinkedList {
   }
 }
 
-const list = new LinkedList();
-
-const makeNode = (value) => {
+const makeNode = (value, list) => {
 
   if (!list.head) {
 
@@ -42,7 +40,5 @@ const makeNode = (value) => {
     }
   }
 };
-
-makeNode(1);
 
 module.export = {makeNode};

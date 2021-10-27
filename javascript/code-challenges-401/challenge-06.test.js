@@ -1,7 +1,5 @@
 'use strict';
 
-'use strict';
-
 class Node {
   constructor(value) {
     this.value = value;
@@ -15,9 +13,7 @@ class LinkedList {
   }
 }
 
-const list = new LinkedList();
-
-const makeNode = (value) => {
+const makeNode = (value, list) => {
 
   if (!list.head) {
 
@@ -45,18 +41,20 @@ const makeNode = (value) => {
   }
 };
 
-describe('Testing if list has a node', () => {
+xdescribe('Testing if list has a node', () => {
   test('It should create three nodes', () => {
 
-    expect(makeNode(1)).toBe();
-    expect(makeNode(2)).toBe();
-    expect(makeNode(3)).toBe();
+    const testList = new LinkedList;
 
+    expect(makeNode(1, testList)).toBe();
+    expect(makeNode(2, testList)).toBe();
+    expect(makeNode(3, testList)).toBe();
 
   });
 });
 
-xdescribe('Testing if function strings nodes together', () => {
+
+describe('Testing if function strings nodes together', () => {
   test('It should return a string containing the values of the linked list', () => {
 
     const testList = new LinkedList();
