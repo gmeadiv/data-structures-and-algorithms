@@ -44,9 +44,23 @@ const makeNode = (value, list) => {
 const insertNodeBefore = (valueToInsert, node, list) => {
 
   if (list.head.value === node) {
+    let current = list.head;
+    let currentValue = list.head.value;
+
+    let tempValue;
 
     list.head.value = valueToInsert;
 
+    while (current.next) {
+      tempValue = current.next.value;
+      current.next.value = currentValue;
+      current = current.next;
+      currentValue = tempValue;
+    }
+
+    if (!current.next) {
+      makeNode(currentValue, list);
+    }
   } else {
 
     let current = list.head;
@@ -125,16 +139,83 @@ describe('Testing inserting a node before a specified node', () => {
       return stringedNodes;
     };
 
+    const halloweenList = new LinkedList();
+
+    makeNode('happy', halloweenList);
+    makeNode('halloween', halloweenList);
+    makeNode('trick', halloweenList);
+    makeNode('treat', halloweenList);
+
+    insertNodeBefore('or', 'treat', halloweenList);
+
+    expect(stringTheseNodes(halloweenList)).toStrictEqual('happy halloween trick or treat');
+
+    const numberList = new LinkedList();
+
+    makeNode(2, numberList);
+    makeNode(3, numberList);
+    makeNode(4, numberList);
+    makeNode(5, numberList);
+
+    insertNodeBefore(1, 2, numberList);
+
+    expect(stringTheseNodes(numberList)).toStrictEqual('1 2 3 4 5');
+
+  });
+});
+
+xdescribe('Testing inserting a node before a specified node', () => {
+  test('It should insert a new node in front of the specified node', () => {
+
+    let stringTheseNodes = (LinkedList) => {
+
+      let nodeArray = [];
+
+      let makeNodeArray = (current) => {
+
+        if (current) {
+
+          if (current.value !== null) {
+            nodeArray.push(current.value);
+          }
+
+          makeNodeArray(current.next);
+
+        }
+      };
+
+      makeNodeArray(LinkedList.head);
+
+      let stringedNodeArray = [];
+
+      let stringifyNodes = (array) => {
+
+        for (let i = 0; i < array.length; i++) {
+
+          if (i === 0) {
+            stringedNodeArray.push(`${array[i]} `);
+          } else if (i > 0 && i < array.length - 1) {
+            stringedNodeArray.push(`${array[i]} `);
+          } else if (i === (array.length - 1)) {
+            stringedNodeArray.push(`${array[i]}`);
+          }
+        }
+      };
+      stringifyNodes(nodeArray);
+      let stringedNodes = stringedNodeArray.join('');
+      return stringedNodes;
+    };
+
     const testList = new LinkedList();
 
-    makeNode('happy', testList);
-    makeNode('halloween', testList);
-    makeNode('trick', testList);
-    makeNode('treat', testList);
+    makeNode('all', testList);
+    makeNode('go', testList);
+    makeNode('to', testList);
+    makeNode('heaven', testList);
 
-    insertNodeBefore('or', 'treat', testList);
+    insertNodeBefore('dogs', 'all', testList);
 
-    expect(stringTheseNodes(testList)).toStrictEqual('happy halloween trick or treat');
+    expect(stringTheseNodes(testList)).toStrictEqual('all dogs go to heaven');
 
   });
 });
