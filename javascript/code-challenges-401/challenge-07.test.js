@@ -78,5 +78,19 @@ let kthFromEnd = (k, list) => {
   return nodeValue;
 };
 
-kthFromEnd(0, numberList);
-kthFromEnd(2, numberList);
+describe('Testing kthFromEnd function', () => {
+  test('It should return the value of the node which can be found kth places behind the tail of the list', () => {
+
+    const numberList = new LinkedList();
+
+    makeNode(1, numberList);
+    makeNode(3, numberList);
+    makeNode(8, numberList);
+    makeNode(2, numberList);
+
+    expect(kthFromEnd(0, numberList)).toStrictEqual(2);
+    expect(kthFromEnd(2, numberList)).toStrictEqual(3);
+    expect(kthFromEnd(6, numberList)).toStrictEqual('Exception');
+
+  });
+});
