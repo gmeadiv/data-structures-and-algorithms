@@ -41,8 +41,37 @@ const makeNode = (value, list) => {
   }
 };
 
-xdescribe('Testing if list has a node', () => {
-  test('It should create three nodes', () => {
+const insertNodeBefore = (valueToInsert, node, list) => {
+
+  if (list.head.value === node) {
+
+    list.head.value = valueToInsert;
+
+  } else {
+
+    let current = list.head;
+
+    if (current.next.value === node) {
+
+      current.next.value = valueToInsert;
+
+    } else {
+
+      while (current.next.value !== node) {
+        current = current.next;
+      }
+
+      let tempValue = current.next.value;
+
+      current.next.value = valueToInsert;
+
+      makeNode(tempValue, list);
+    }
+  }
+};
+
+xdescribe('Testing Append', () => {
+  test('It should create three nodes, appending new nodes to the end of the list', () => {
 
     const testList = new LinkedList;
 
@@ -54,16 +83,58 @@ xdescribe('Testing if list has a node', () => {
 });
 
 
-describe('Testing if function strings nodes together', () => {
-  test('It should return a string containing the values of the linked list', () => {
+describe('Testing inserting a node before a specified node', () => {
+  test('It should insert a new node in front of the specified node', () => {
+
+    let stringTheseNodes = (LinkedList) => {
+
+      let nodeArray = [];
+
+      let makeNodeArray = (current) => {
+
+        if (current) {
+
+          if (current.value !== null) {
+            nodeArray.push(current.value);
+          }
+
+          makeNodeArray(current.next);
+
+        }
+      };
+
+      makeNodeArray(LinkedList.head);
+
+      let stringedNodeArray = [];
+
+      let stringifyNodes = (array) => {
+
+        for (let i = 0; i < array.length; i++) {
+
+          if (i === 0) {
+            stringedNodeArray.push(`${array[i]} `);
+          } else if (i > 0 && i < array.length - 1) {
+            stringedNodeArray.push(`${array[i]} `);
+          } else if (i === (array.length - 1)) {
+            stringedNodeArray.push(`${array[i]}`);
+          }
+        }
+      };
+      stringifyNodes(nodeArray);
+      let stringedNodes = stringedNodeArray.join('');
+      return stringedNodes;
+    };
 
     const testList = new LinkedList();
 
-    testList.head = new Node(12);
-    testList.head.next = new Node('string');
-    testList.head.next.next = new Node(8);
+    makeNode('happy', testList);
+    makeNode('halloween', testList);
+    makeNode('trick', testList);
+    makeNode('treat', testList);
 
-    expect(stringTheseNodes(testList)).toStrictEqual('{ 12 } --> { string } --> { 8 } --> NULL');
+    insertNodeBefore('or', 'treat', testList);
+
+    expect(stringTheseNodes(testList)).toStrictEqual('happy halloween trick or treat');
 
   });
 });
