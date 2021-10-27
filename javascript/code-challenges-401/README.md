@@ -9,3 +9,5 @@
 ## [Challenge Five: Linked Lists](./challenge-05.md)
 
 ## [Challenge Six: Linked Lists: **Insertions**](./challenge-06.md)
+
+## [Challenge Seven: Linked Lists: Kth From End](./challenge-07.md)
