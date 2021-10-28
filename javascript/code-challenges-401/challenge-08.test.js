@@ -41,17 +41,6 @@ const makeNode = (value, list) => {
   }
 };
 
-const list1 = new LinkedList();
-const list2 = new LinkedList();
-
-makeNode(1, list1);
-makeNode(3, list1);
-makeNode(2, list1);
-
-makeNode(5, list2);
-makeNode(9, list2);
-makeNode(4, list2);
-
 const zipLists = (list1, list2) => {
 
   if (!list1.head || !list2.head) { console.log('can\'t zip an empty list!') }
@@ -63,33 +52,113 @@ const zipLists = (list1, list2) => {
 
   let makeNodeArray = (current1, current2) => {
 
-    if (current1.value !== null && current2.value !== null) {
-
+    if (current1 && current2) {
       tempArray.push(current1.value, current2.value);
-
     }
 
-    else if (current1.value !== null && current2.value === null) {
-
+    else if (current1 && !current2) {
       tempArray.push(current1.value);
-
     }
 
-    else if (current1.value === null && current2.value !== null) {
-
+    else if (!current1 && current2) {
       tempArray.push(current2.value);
-
     }
 
-    if (current1.next !== null && current2.next !== null) {
+    if (current1 !== null && current2 !== null) {
       makeNodeArray(current1.next, current2.next);
     }
-  }
+
+    else if (current1 !== null && current2 === null) {
+      makeNodeArray(current1.next, null);
+    }
+
+    else if (current1 === null && current2 !== null) {
+      makeNodeArray(null, current2.next);
+    }
+
+  };
 
   makeNodeArray(current1, current2);
 
-  console.log(tempArray);
+  const zippedList = new LinkedList();
 
+  tempArray.map(value => {
+    makeNode(value, zippedList);
+  });
+
+  return zippedList;
 };
 
-zipLists(list1, list2);
+describe('Testing zipper function', () => {
+  test('It zip lists of equal length together', () => {
+
+    const list1 = new LinkedList();
+    const list2 = new LinkedList();
+    const testList = new LinkedList();
+
+    makeNode(1, list1);
+    makeNode(3, list1);
+    makeNode(2, list1);
+
+    makeNode(5, list2);
+    makeNode(9, list2);
+    makeNode(4, list2);
+
+    makeNode(1, testList);
+    makeNode(5, testList);
+    makeNode(3, testList);
+    makeNode(9, testList);
+    makeNode(2, testList);
+    makeNode(4, testList);
+
+    expect(zipLists(list1, list2)).toStrictEqual(testList);
+
+  });
+
+  test('It should zip a short list with a long list', () => {
+
+    const list1 = new LinkedList();
+    const list2 = new LinkedList();
+    const testList = new LinkedList();
+
+    makeNode(1, list1);
+    makeNode(3, list1);
+
+    makeNode(5, list2);
+    makeNode(9, list2);
+    makeNode(4, list2);
+
+    makeNode(1, testList);
+    makeNode(5, testList);
+    makeNode(3, testList);
+    makeNode(9, testList);
+    makeNode(4, testList);
+
+    expect(zipLists(list1, list2)).toStrictEqual(testList);
+
+  });
+
+  test('It should zip a long list with a short list', () => {
+
+    const list1 = new LinkedList();
+    const list2 = new LinkedList();
+    const testList = new LinkedList();
+
+    makeNode(1, list1);
+    makeNode(3, list1);
+    makeNode(2, list1);
+
+    makeNode(5, list2);
+    makeNode(9, list2);
+
+    makeNode(1, testList);
+    makeNode(5, testList);
+    makeNode(3, testList);
+    makeNode(9, testList);
+    makeNode(2, testList);
+
+    expect(zipLists(list1, list2)).toStrictEqual(testList);
+
+  });
+
+});
