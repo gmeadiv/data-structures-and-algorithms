@@ -13,3 +13,5 @@
 ## [Challenge Seven: Linked Lists: Kth From End](./challenge-07.md)
 
 ## [Challenge Eight: Linked Lists: Zipper](./challenge-08.md)
+
+## [Challenge Nine: Interview: Reverse a Linked List](./challenge-09.md)
