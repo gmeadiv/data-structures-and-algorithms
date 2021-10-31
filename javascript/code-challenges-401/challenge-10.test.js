@@ -20,9 +20,22 @@ class Stack {
   }
 
   pop() {
-    let temp = this.top;
-    this.top = temp.next;
-    return temp.value;
+    if (this.top.value !== null) {
+      let temp = this.top;
+      this.top = temp.next;
+      return temp.value;
+    } else {
+      console.log('Exception');
+    }
+  }
+
+  peek() {
+    if (this.top.value !== null) {
+      let tempValue = this.top.value;
+      return tempValue;
+    } else {
+      console.log('Exception');
+    }
   }
 }
 
@@ -58,30 +71,3 @@ class Queue {
     return nodeToRemove.value;
   }
 }
-
-const stack = new Stack();
-
-stack.push(30);
-stack.push(13);
-stack.push(74);
-console.log(JSON.stringify(stack), '<-- JSON STACK ONE');
-
-let one = stack.pop();
-let two = stack.pop();
-let three = stack.pop();
-
-console.log(one, two, three), '<-- ONE | TWO | THREE';
-console.log(JSON.stringify(stack), '<-- JSON STACK TWO');
-
-let queue = new Queue();
-
-queue.enqueue(100);
-queue.enqueue(32);
-
-console.log(JSON.stringify(queue), '<-- JSON QUEUE ONE');
-
-let first = queue.dequeue();
-let second = queue.dequeue();
-
-console.log(first, second), '<-- FIRST | SECOND';
-console.log(JSON.stringify(queue), '<-- JSON QUEUE TWO');
