@@ -70,4 +70,13 @@ class Queue {
 
     return nodeToRemove.value;
   }
+
+  peek() {
+    if (this.front !== null) {
+      let tempValue = this.front.value;
+      return tempValue;
+    } else {
+      console.log('Exception')
+    }
+  }
 }
