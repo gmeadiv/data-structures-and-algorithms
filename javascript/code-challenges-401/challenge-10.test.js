@@ -82,7 +82,7 @@ class Queue {
       let tempValue = this.front.value;
       return tempValue;
     } else {
-      console.log('Exception');
+      return 'Exception';
     }
   }
 
@@ -178,7 +178,7 @@ xdescribe('Testing Stack functions', () => {
 });
 
 describe('Testing Queue functions', () => {
-  test('It should push four values into the stack', () => {
+  test('It should push four values into the queue', () => {
 
     const queue = new Queue();
 
@@ -188,75 +188,70 @@ describe('Testing Queue functions', () => {
     queue.enqueue(4);
 
 
-    expect(JSON.stringify(queue)).toStrictEqual('{"top":{"value":4,"next":{"value":3,"next":{"value":2,"next":{"value":1,"next":null}}}}}');
+    expect(JSON.stringify(queue)).toStrictEqual('{"front":{"value":1,"next":{"value":2,"next":{"value":3,"next":{"value":4,"next":null}}}},"back":{"value":4,"next":null}}');
 
   });
 
-  test('It should pop values off of the stack', () => {
+  test('It should pop values off of the queue', () => {
 
-    const stack = new Stack();
+    const queue = new Queue();
 
-    stack.push(1);
-    stack.push(2);
+    queue.enqueue(1);
+    queue.enqueue(2);
 
-    stack.pop();
+    let first = queue.dequeue();
 
-    expect(JSON.stringify(stack)).toStrictEqual('{"top":{"value":1,"next":null}}');
-
-    stack.pop();
-
-
-    expect(JSON.stringify(stack)).toStrictEqual('{"top":null}');
+    expect(first).toStrictEqual(1);
 
   });
 
-  test('It should peek into the Stack and return the top\'s value', () => {
+  test('It should peek into the queue and return the top\'s value', () => {
 
-    const stack = new Stack();
+    const queue = new Queue();
 
-    stack.push(1);
-    stack.push(2);
-    stack.push(3);
-    stack.push(4);
+    queue.enqueue(1);
+    queue.enqueue(2);
+    queue.enqueue(3);
+    queue.enqueue(4);
 
-    stack.peek();
+    queue.peek();
 
-    expect(stack.peek()).toStrictEqual(4);
+    expect(queue.peek()).toStrictEqual(1);
 
   });
 
   test('It should peek into the stack and return Exception if it\'s empty', () => {
 
-    const stack = new Stack();
+    const queue = new Queue();
 
-    stack.peek();
+    queue.peek();
 
-    expect(stack.peek()).toStrictEqual('Exception');
+    expect(queue.peek()).toStrictEqual('Exception');
 
   });
 
   test('It should return true if it\'s empty', () => {
 
-    const stack = new Stack();
+    const queue = new Queue();
 
-    stack.isEmpty();
+    queue.isEmpty();
 
-    expect(stack.isEmpty()).toStrictEqual(true);
+    expect(queue.isEmpty()).toStrictEqual(true);
 
   });
 
   test('It should return false if not empty', () => {
 
-    const stack = new Stack();
+    const queue = new Queue();
 
-    stack.push(1);
-    stack.push(2);
-    stack.push(3);
-    stack.push(4);
+    queue.enqueue(1);
+    queue.enqueue(2);
+    queue.enqueue(3);
+    queue.enqueue(4);
 
-    stack.isEmpty();
+    queue.isEmpty();
 
-    expect(stack.isEmpty()).toStrictEqual(false);
+    expect(queue.isEmpty()).toStrictEqual(false);
 
   });
 });
