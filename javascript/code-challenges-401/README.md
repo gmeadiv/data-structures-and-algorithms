@@ -15,3 +15,7 @@
 ## [Challenge Eight: Linked Lists: Zipper](./challenge-08.md)
 
 ## [Challenge Nine: Interview: Reverse a Linked List](./challenge-09.md)
+
+## [Challenge Ten: Stacks and Queues](./challenge-10.md)
+
+## [Challenge Eleven: Pseudoqueueing with Stacks](./challenge-11.md)
