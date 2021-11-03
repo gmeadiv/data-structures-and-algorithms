@@ -2,7 +2,7 @@
 
 class Node {
   constructor(animal) {
-    this.animal = animal;
+    this.value = animal;
     this.next = null;
   }
 }
@@ -28,53 +28,65 @@ class Queue {
     }
   }
 
-  dequeue() {
+  dequeue(preference) {
 
-    let nodeToRemove = this.front;
+    let foundAnimal = null;
 
-    this.front = nodeToRemove.next;
+    if (preference === this.front.value.name) {
 
-    if (this.back === nodeToRemove) {
-      this.back = nodeToRemove.next;
+      foundAnimal = this.front;
+
+      this.front = foundAnimal.next;
+
+      return foundAnimal.value;
+
+    } else {
+
+      let foundAnimal = this.front.next;
+
+      while (foundAnimal.value.name !== preference) {
+
+        foundAnimal = foundAnimal.next;
+
+      }
+
+      return foundAnimal;
+
     }
-
-    return nodeToRemove.animal;
   }
 }
 
 describe('Testing Stack functions', () => {
 
-  // test('It should put animals into the Animal Shelter', () => {
-
-  //   let animalShelter = new Queue();
-
-  //   const dog1 = {
-  //     name: 'Tate R. Tot',
-  //     type: 'dog'
-  //   };
-
-  //   const cat1 = {
-  //     name: 'Pookie',
-  //     type: 'cat'
-  //   };
-
-  //   const dog2 = {
-  //     name: 'Hot Dog',
-  //     type: 'dog'
-  //   };
-
-  //   animalShelter.enqueue(dog1);
-  //   animalShelter.enqueue(cat1);
-  //   animalShelter.enqueue(dog2);
-
-  //   console.log(JSON.stringify(animalShelter.front));
-
-  //   expect(JSON.stringify(animalShelter.front)).toStrictEqual('{"type":{"name":"Tate R. Tot","type":"dog"},"next":{"type":{"name":"Pookie","type":"cat"},"next":{"type":{"name":"Hot Dog","type":"dog"},"next":null}}}');
-  //   expect(JSON.stringify(animalShelter.back)).toStrictEqual('{"type":{"name":"Hot Dog","type":"dog"},"next":null}');
-
-  // });
-
   test('It should put animals into the Animal Shelter', () => {
+
+    let animalShelter = new Queue();
+
+    const dog1 = {
+      name: 'Tate R. Tot',
+      type: 'dog'
+    };
+
+    const cat1 = {
+      name: 'Pookie',
+      type: 'cat'
+    };
+
+    const dog2 = {
+      name: 'Hot Dog',
+      type: 'dog'
+    };
+
+    animalShelter.enqueue(dog1);
+    animalShelter.enqueue(cat1);
+    animalShelter.enqueue(dog2);
+
+    expect(JSON.stringify(animalShelter.front)).toStrictEqual('{"value":{"name":"Tate R. Tot","type":"dog"},"next":{"value":{"name":"Pookie","type":"cat"},"next":{"value":{"name":"Hot Dog","type":"dog"},"next":null}}}');
+    expect(JSON.stringify(animalShelter.back)).toStrictEqual('{"value":{"name":"Hot Dog","type":"dog"},"next":null}');
+
+  });
+
+  test('It should find and remove a specific animal from the shelter', () => {
 
     let animalShelter = new Queue();
     const dog1 = {
@@ -94,7 +106,7 @@ describe('Testing Stack functions', () => {
     animalShelter.enqueue(cat1);
     animalShelter.enqueue(dog2);
 
-    expect(JSON.stringify(animalShelter.dequeue())).toStrictEqual('{"name":"Tate R. Tot","type":"dog"}');
+    expect(JSON.stringify(animalShelter.dequeue('Hot Dog'))).toStrictEqual('{"value":{"name":"Hot Dog","type":"dog"},"next":null}');
 
   });
 
