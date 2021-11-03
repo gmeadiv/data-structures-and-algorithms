@@ -80,39 +80,61 @@ class Queue {
 
 describe('Testing Stack functions', () => {
 
-  validateBrackets(string) {
+  function validateBrackets(string) {
 
-    let validator = null;
+    let validateStack = new Stack();
 
     let splitString = [];
-
     splitString.push(...string.split(''));
+    splitString.map(bracket => {
+      validateStack.push(bracket);
+    });
 
-    let lastIndex = splitString.length - 1;
+    let validator = false;
+    let top = validateStack.top;
 
-    if (splitString[0] === '{' || splitString[0] === '[' || splitString[0] === '(') {
+    if (top.value === '}' || top.value === ']' || top.value === ')') {
 
-      if (splitString[0] === '{' && splitString[lastIndex] === '}') {
+      let current = top;
+      while (current.next) {
+        current = current.next;
+      }
+
+      if (current.value === '{' || current.value === '['|| current.value === '(' && top.value === '}' || top.value === ']' || top.value === ')') {
         validator = true;
         return validator;
-      } else if (splitString[0] === '[' && splitString[lastIndex] === ']') {
-        validator = true;
-        return validator;
-      } else if (splitString[0] === '(' && splitString[lastIndex] === ')') {
-        validator = true;
-        return validator;
-      } else { return validator; }
+      }
 
-    } else { return validator; }
+    } else {return validator;}
+
   }
 
-  test('It should push four values into the stack', () => {
+  test('It should return true if each opening bracket has a closing bracket', () => {
 
-    const stack = new Stack();
+    expect(validateBrackets('{}(){}')).toStrictEqual(true);
+    expect(validateBrackets('()[[Extra Characters]]')).toStrictEqual(true);
 
-    stack.validateBrackets('{}(){}');
+  });
 
-    expect(JSON.stringify(stack)).toStrictEqual('');
+  test('It should return false if each opening bracket has a closing bracket', () => {
+
+    expect(validateBrackets('(](')).toStrictEqual(false);
+    expect(validateBrackets('[({}]')).toStrictEqual(false);
 
   });
 });
+
+// if (splitString[0] === '{' || splitString[0] === '[' || splitString[0] === '(') {
+
+//   if (splitString[0] === '{' && splitString[lastIndex] === '}') {
+//     validator = true;
+//     return validator;
+//   } else if (splitString[0] === '[' && splitString[lastIndex] === ']') {
+//     validator = true;
+//     return validator;
+//   } else if (splitString[0] === '(' && splitString[lastIndex] === ')') {
+//     validator = true;
+//     return validator;
+//   } else { return validator; }
+
+// } else { return validator; }
