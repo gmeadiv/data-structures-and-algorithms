@@ -1,8 +1,8 @@
 'use strict';
 
 class Node {
-  constructor(type) {
-    this.type = type;
+  constructor(animal) {
+    this.animal = animal;
     this.next = null;
   }
 }
@@ -29,14 +29,16 @@ class Queue {
   }
 
   dequeue() {
+
     let nodeToRemove = this.front;
+
     this.front = nodeToRemove.next;
 
     if (this.back === nodeToRemove) {
       this.back = nodeToRemove.next;
     }
 
-    return nodeToRemove.value;
+    return nodeToRemove.animal;
   }
 }
 
@@ -75,17 +77,14 @@ describe('Testing Stack functions', () => {
   test('It should put animals into the Animal Shelter', () => {
 
     let animalShelter = new Queue();
-
     const dog1 = {
       name: 'Tate R. Tot',
       type: 'dog'
     };
-
     const cat1 = {
       name: 'Pookie',
       type: 'cat'
     };
-
     const dog2 = {
       name: 'Hot Dog',
       type: 'dog'
@@ -95,10 +94,7 @@ describe('Testing Stack functions', () => {
     animalShelter.enqueue(cat1);
     animalShelter.enqueue(dog2);
 
-    console.log(JSON.stringify(animalShelter.dequeue));
-
-    expect(JSON.stringify(animalShelter.front)).toStrictEqual();
-    expect(JSON.stringify(animalShelter.back)).toStrictEqual();
+    expect(JSON.stringify(animalShelter.dequeue())).toStrictEqual('{"name":"Tate R. Tot","type":"dog"}');
 
   });
 
