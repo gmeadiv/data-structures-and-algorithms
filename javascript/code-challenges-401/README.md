@@ -19,3 +19,5 @@
 ## [Challenge Ten: Stacks and Queues](./challenge-10.md)
 
 ## [Challenge Eleven: Pseudoqueueing with Stacks](./challenge-11.md)
+
+## [Challenge Twelve: Animal Shelter](./challenge-12.md)
