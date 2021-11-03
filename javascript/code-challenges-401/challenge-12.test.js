@@ -30,11 +30,9 @@ class Queue {
 
   dequeue(preference) {
 
-    let foundAnimal = null;
-
     if (preference === this.front.value.name) {
 
-      foundAnimal = this.front;
+      let foundAnimal = this.front;
 
       this.front = foundAnimal.next;
 
@@ -48,9 +46,9 @@ class Queue {
 
         foundAnimal = foundAnimal.next;
 
-      }
+        if (foundAnimal.value.name === preference) { return foundAnimal; } else { return null; }
 
-      return foundAnimal;
+      }
 
     }
   }
@@ -107,6 +105,30 @@ describe('Testing Stack functions', () => {
     animalShelter.enqueue(dog2);
 
     expect(JSON.stringify(animalShelter.dequeue('Hot Dog'))).toStrictEqual('{"value":{"name":"Hot Dog","type":"dog"},"next":null}');
+
+  });
+
+  test('It should return null if the animal isn\'t found', () => {
+
+    let animalShelter = new Queue();
+    const dog1 = {
+      name: 'Tate R. Tot',
+      type: 'dog'
+    };
+    const cat1 = {
+      name: 'Pookie',
+      type: 'cat'
+    };
+    const dog2 = {
+      name: 'Hot Dog',
+      type: 'dog'
+    };
+
+    animalShelter.enqueue(dog1);
+    animalShelter.enqueue(cat1);
+    animalShelter.enqueue(dog2);
+
+    expect(animalShelter.dequeue('A Bad Dog')).toBe(null);
 
   });
 
