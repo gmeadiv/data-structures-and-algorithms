@@ -86,9 +86,12 @@ describe('Testing Stack functions', () => {
 
     let splitString = [];
     splitString.push(...string.split(''));
-    splitString.map(bracket => {
-      validateStack.push(bracket);
-    });
+
+    console.log(splitString.length % 2, '<-- split string length --<<');
+    
+    // for (let i = 0; i < splitString.length; i++) {
+
+    // }
 
     let validator = false;
     let top = validateStack.top;
@@ -96,14 +99,15 @@ describe('Testing Stack functions', () => {
     if (top.value === '}' || top.value === ']' || top.value === ')') {
 
       let current = top;
+
       while (current.next) {
         current = current.next;
       }
 
-      if (current.value === '{' || current.value === '['|| current.value === '(' && top.value === '}' || top.value === ']' || top.value === ')') {
-        validator = true;
-        return validator;
-      }
+      // if (current.value === '{' || current.value === '['|| current.value === '(' && top.value === '}' || top.value === ']' || top.value === ')') {
+      //   validator = true;
+      //   return validator;
+      // }
 
     } else {return validator;}
 
@@ -123,18 +127,3 @@ describe('Testing Stack functions', () => {
 
   });
 });
-
-// if (splitString[0] === '{' || splitString[0] === '[' || splitString[0] === '(') {
-
-//   if (splitString[0] === '{' && splitString[lastIndex] === '}') {
-//     validator = true;
-//     return validator;
-//   } else if (splitString[0] === '[' && splitString[lastIndex] === ']') {
-//     validator = true;
-//     return validator;
-//   } else if (splitString[0] === '(' && splitString[lastIndex] === ')') {
-//     validator = true;
-//     return validator;
-//   } else { return validator; }
-
-// } else { return validator; }
