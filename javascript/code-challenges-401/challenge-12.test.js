@@ -54,7 +54,7 @@ class Queue {
   }
 }
 
-describe('Testing Stack functions', () => {
+describe('Testing the animal shelter queue', () => {
 
   test('It should put animals into the Animal Shelter', () => {
 
