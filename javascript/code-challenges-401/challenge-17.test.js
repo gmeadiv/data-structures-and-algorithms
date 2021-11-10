@@ -17,21 +17,24 @@ class BinaryTree {
 function byBreadth(root) {
 
   const queue = [];
+  let array = [];
 
   let current = root;
+
   queue.unshift(root);
+
   while(queue.length) {
-    // take a node off the queue
+
     current = queue.pop();
 
-    // read it's value
-    console.log(current.value);
+    array.push(current.value);
 
-    // push all children into queue.
     for (let node of current.children) {
       queue.unshift(node);
     }
   }
+
+  return array;
 }
 
 describe('Testing by breadth function', () => {
@@ -51,7 +54,7 @@ describe('Testing by breadth function', () => {
 
     let breadthArray = byBreadth(tree.root);
 
-    expect(breadthArray).toStrictEqual();
+    expect(breadthArray).toStrictEqual([2,7,5,2,6,9,5,11,4]);
 
   });
 });
