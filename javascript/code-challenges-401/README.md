@@ -29,3 +29,5 @@
 ## [Challenge Sixteen: Tree Max](./challenge-16.test.js)
 
 ## [Challenge Seventeen: Tree by Breadth](./challenge-17.test.js)
+
+## [Challenge Eighteen: Tree Fizz Buzz](./challenge-18.test.js)
