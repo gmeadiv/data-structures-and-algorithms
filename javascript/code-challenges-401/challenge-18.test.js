@@ -1,5 +1,7 @@
 'use strict';
 
+const { ForecastQueryService } = require("aws-sdk");
+
 class Node {
   constructor(value, k=0) {
     this.value = value;
@@ -83,7 +85,7 @@ describe('Testing by Fizz Buzz function', () => {
 
   });
 
-  test('It should return Fizz Buzz if value of node is divisible by three', () => {
+  test('It should return Fizz Buzz if value of node is divisible by both three and five', () => {
 
     let tree = new BinaryTree();
 
@@ -99,6 +101,25 @@ describe('Testing by Fizz Buzz function', () => {
     fizzBuzz(tree.root);
 
     expect(tree.root.children[1].value).toStrictEqual('FIZZ BUZZ');
+
+  });
+
+  test('If value isn\'t divisible by three or five, it should convert number into string', () => {
+
+    let tree = new BinaryTree();
+
+    tree.root = new Node(5);
+    tree.root.children.push(new Node(4), new Node(15));
+    tree.root.children[0].children.push(new Node(3), new Node(8));
+    tree.root.children[0].children[1].children.push(new Node(15), new Node(10));
+    tree.root.children[1].children.push(new Node(9));
+    tree.root.children[1].children[0].children.push(new Node(5));
+
+
+
+    fizzBuzz(tree.root);
+
+    expect(tree.root.children[0].value).toStrictEqual('4');
 
   });
 });
