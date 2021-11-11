@@ -14,7 +14,7 @@ class BinaryTree {
   }
 }
 
-function byBreadth(root) {
+function fizzBuzz(root) {
 
   const queue = [];
   let array = [];
@@ -27,34 +27,78 @@ function byBreadth(root) {
 
     current = queue.pop();
 
+    if (current.value % 3 === 0) {
+
+      if (current.value % 5 === 0) {current.value = 'FIZZ BUZZ';} else {current.value = 'FIZZ';}
+
+    } else if (current.value % 5 === 0) {current.value = 'BUZZ';}
+
+    else {current.value = JSON.stringify(current.value);}
+
     array.push(current.value);
 
     for (let node of current.children) {
       queue.unshift(node);
     }
   }
-
-  return array;
 }
 
-xdescribe('Testing by breadth function', () => {
+describe('Testing by Fizz Buzz function', () => {
 
-  test('It should return the highest value in the tree', () => {
+  test('It should return Fizz if value of node is divisible by three', () => {
 
     let tree = new BinaryTree();
 
-    tree.root = new Node(2);
-    tree.root.children.push(new Node(7), new Node(5));
-    tree.root.children[0].children.push(new Node(2), new Node(6));
-    tree.root.children[0].children[1].children.push(new Node(5), new Node(11));
+    tree.root = new Node(5);
+    tree.root.children.push(new Node(4), new Node(15));
+    tree.root.children[0].children.push(new Node(3), new Node(8));
+    tree.root.children[0].children[1].children.push(new Node(15), new Node(10));
     tree.root.children[1].children.push(new Node(9));
-    tree.root.children[1].children[0].children.push(new Node(4));
+    tree.root.children[1].children[0].children.push(new Node(5));
 
 
 
-    let breadthArray = byBreadth(tree.root);
+    fizzBuzz(tree.root);
 
-    expect(breadthArray).toStrictEqual([2,7,5,2,6,9,5,11,4]);
+    expect(tree.root.children[0].children[0].value).toStrictEqual('FIZZ');
+
+  });
+
+  test('It should return Buzz if value of node is divisible by five', () => {
+
+    let tree = new BinaryTree();
+
+    tree.root = new Node(5);
+    tree.root.children.push(new Node(4), new Node(15));
+    tree.root.children[0].children.push(new Node(3), new Node(8));
+    tree.root.children[0].children[1].children.push(new Node(15), new Node(10));
+    tree.root.children[1].children.push(new Node(9));
+    tree.root.children[1].children[0].children.push(new Node(5));
+
+
+
+    fizzBuzz(tree.root);
+
+    expect(tree.root.value).toStrictEqual('BUZZ');
+
+  });
+
+  test('It should return Fizz Buzz if value of node is divisible by three', () => {
+
+    let tree = new BinaryTree();
+
+    tree.root = new Node(5);
+    tree.root.children.push(new Node(4), new Node(15));
+    tree.root.children[0].children.push(new Node(3), new Node(8));
+    tree.root.children[0].children[1].children.push(new Node(15), new Node(10));
+    tree.root.children[1].children.push(new Node(9));
+    tree.root.children[1].children[0].children.push(new Node(5));
+
+
+
+    fizzBuzz(tree.root);
+
+    expect(tree.root.children[1].value).toStrictEqual('FIZZ BUZZ');
 
   });
 });
