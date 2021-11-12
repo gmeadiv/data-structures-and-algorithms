@@ -4,4 +4,4 @@ If two binary trees contain the same number of files, this function returns true
 
 ## Whiteboard solution
 
-![Whiteboard solution]('code-challenges-401/images/challenge19.jpeg')
+![Whiteboard solution]('./images/challenge19.jpeg')
