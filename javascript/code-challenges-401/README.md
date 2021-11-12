@@ -32,4 +32,4 @@
 
 ## [Challenge Eighteen: Tree Fizz Buzz](./challenge-18.test.js)
 
-## [Challenge Nineteen: Mock Interview](./challenge-18.md)
+## [Challenge Nineteen: Mock Interview](./challenge-19.md)
