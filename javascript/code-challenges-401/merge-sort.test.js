@@ -3,13 +3,24 @@
 let mergeSort = (array) => {
   let n = array.length;
 
-  if (n > 1) {
+  if (n > 2) {
 
     let left = [];
     let right = [];
     let mid = n / 2;
 
-    console.log(mid, '<-- mid --<<');
+    for (let i = 0; i < array.length; i++) {
+
+      if (i < mid || i === mid) {
+        left.push(array[i]);
+      } else {
+        right.push(array[i]);
+      }
+
+    }
+
+    mergeSort(left);
+    mergeSort(right);
 
     merge(left, right, array);
   }
