@@ -1,28 +1,20 @@
 'use strict';
 
 let mergeSort = (array) => {
-
   let n = array.length;
-
   if (n <= 1) {
     return array;
   }
-
-  console.log(n, '<-- n --<<');
-
   let mid = Math.floor(n / 2);
   let left = array.slice(0, mid);
   let right = array.slice(mid);
-
   return merge(mergeSort(left), mergeSort(right));
 };
 
 let merge = (left, right) => {
-
   let mergedArray = [];
   let leftIndex = 0;
   let rightIndex = 0;
-
   while (leftIndex < left.length && rightIndex < right.length) {
     if (left[leftIndex] < right[rightIndex]) {
       mergedArray.push(left[leftIndex]);
@@ -32,11 +24,9 @@ let merge = (left, right) => {
       rightIndex++;
     }
   }
-
   return mergedArray
     .concat(left.slice(leftIndex))
     .concat(right.slice(rightIndex));
-
 };
 
 describe('Testing mergeSort function', () => {
