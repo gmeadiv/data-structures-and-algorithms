@@ -1,68 +1,48 @@
 'use strict';
 
 let mergeSort = (array) => {
+
   let n = array.length;
 
-  if (n > 2) {
-
-    let left = [];
-    let right = [];
-    let mid = n / 2;
-
-    for (let i = 0; i < array.length; i++) {
-
-      if (i < mid || i === mid) {
-        left.push(array[i]);
-      } else {
-        right.push(array[i]);
-      }
-
-    }
-
-    mergeSort(left);
-    mergeSort(right);
-
-    merge(left, right, array);
+  if (n <= 1) {
+    return array;
   }
 
-  return array;
+  console.log(n, '<-- n --<<');
+
+  let mid = Math.floor(n / 2);
+  let left = array.slice(0, mid);
+  let right = array.slice(mid);
+
+  return merge(mergeSort(left), mergeSort(right));
 };
 
-let merge = (left, right, array) => {
+let merge = (left, right) => {
 
-  let i = 0;
-  let j = 0;
-  let k = 0;
+  let mergedArray = [];
+  let leftIndex = 0;
+  let rightIndex = 0;
 
-  while (i < left.length && j < right.length) {
-    if (left[i] === right[j]) {
-      array[k] = left[i];
-      i = i + 1;
+  while (leftIndex < left.length && rightIndex < right.length) {
+    if (left[leftIndex] < right[rightIndex]) {
+      mergedArray.push(left[leftIndex]);
+      leftIndex++;
     } else {
-      array[k] = right[j];
+      mergedArray.push(right[rightIndex]);
+      rightIndex++;
     }
-
-    k = k + 1;
   }
 
-  if (i === left.length) {
-    right.map(number => {
-      array.push(number);
-    });
-  } else {
-    left.map(number => {
-      array.push(number);
-    });
-  }
+  return mergedArray
+    .concat(left.slice(leftIndex))
+    .concat(right.slice(rightIndex));
+
 };
 
 describe('Testing mergeSort function', () => {
-
   test('It should sort an array', () => {
-
-    let testArray = [8,4,23,42,16,15];
-
-    expect(mergeSort(testArray)).toStrictEqual([8,4,23,42,16,15]);
+    let testArray = [32, -27, 43, 3, 9, 82, -10];
+    expect(mergeSort(testArray)).toStrictEqual([-27, -10, 3, 9, 32, 43, 82]);
 
   });
 });
