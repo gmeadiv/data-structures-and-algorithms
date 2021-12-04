@@ -16,6 +16,7 @@ class BinaryTree {
 const getCommonValues = (firstTree, secondTree) => {
 
   let comparisonArray = [];
+
   const fillArray = (root) => {
     let current = root;
     comparisonArray.push(current.value);
