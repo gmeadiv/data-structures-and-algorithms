@@ -1,7 +1,5 @@
 'use strict';
 
-const { ForecastQueryService } = require("aws-sdk");
-
 class Node {
   constructor(value, k=0) {
     this.value = value;
