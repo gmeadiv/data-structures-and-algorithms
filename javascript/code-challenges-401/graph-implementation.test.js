@@ -39,7 +39,7 @@ class Graph {
 
   getNeighbors(vertex) {
     if (!this.adjacencyList.has(vertex)) {
-      throw new Error('get neighbor error')
+      throw new Error('get neighbor error');
     }
 
     return [...this.adjacencyList.get(vertex)];
@@ -69,6 +69,7 @@ class Graph {
       }
     }
 
+    console.log(visitedNodes.size, '<-- visited nodes --<<')
     return visitedNodes;
   }
 }
@@ -97,5 +98,15 @@ graph.addDirectedEdge(F, G);
 graph.addDirectedEdge(G, H);
 graph.addDirectedEdge(H, F);
 
+let list = Object.toString(graph.adjacencyList);
 
-console.log(graph.breadthFirst(A), '<-- log --<<');
+console.log(list, '<-- list --<<');
+
+describe('Testing graph implementation', () => {
+  test('It should be able to create a graph', () => {
+
+    expect(graph.adjacencyList.size).toStrictEqual(8);
+
+  });
+});
+
