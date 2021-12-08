@@ -78,34 +78,24 @@ class Graph {
 
 let graph = new Graph();
 
-let A = graph.addVertex('A');
-let B = graph.addVertex('B');
-let C = graph.addVertex('C');
-let D = graph.addVertex('D');
-let E = graph.addVertex('E');
-let F = graph.addVertex('F');
-let G = graph.addVertex('G');
-let H = graph.addVertex('H');
+let A = graph.addVertex('Pandora');
+let B = graph.addVertex('Arendelle');
+let C = graph.addVertex('Metroville');
+let D = graph.addVertex('Monstropolis');
+let E = graph.addVertex('Narnia');
+let F = graph.addVertex('Naboo');
 
 
-graph.addDirectedEdge(A, D);
-graph.addDirectedEdge(A, C);
-graph.addDirectedEdge(D, F);
+graph.addDirectedEdge(A, B);
 graph.addDirectedEdge(B, C);
-graph.addDirectedEdge(B, E);
-graph.addDirectedEdge(C, F);
+graph.addDirectedEdge(B, D);
+graph.addDirectedEdge(C, D);
 graph.addDirectedEdge(C, E);
-graph.addDirectedEdge(C, B);
-graph.addDirectedEdge(F, G);
-graph.addDirectedEdge(G, H);
-graph.addDirectedEdge(H, F);
+graph.addDirectedEdge(C, F);
+graph.addDirectedEdge(D, F);
+graph.addDirectedEdge(F, E);
 
 describe('Testing graph implementation', () => {
-  test('It should be able to create a graph', () => {
-
-    expect(graph.adjacencyList.size).toStrictEqual(8);
-
-  });
 
   test('It should be able to return all the nodes in the graph', () => {
 
@@ -113,8 +103,7 @@ describe('Testing graph implementation', () => {
 
     console.log(JSON.stringify(results), '<-- log');
 
-
-    expect(JSON.stringify(results)).toBe('[{"value":"A"},{"value":"D"},{"value":"C"},{"value":"F"},{"value":"E"},{"value":"B"},{"value":"G"},{"value":"H"}]');
+    expect(JSON.stringify(results)).toBe('[{"value":"Pandora"},{"value":"Arendelle"},{"value":"Metroville"},{"value":"Monstropolis"},{"value":"Narnia"},{"value":"Naboo"}]');
 
   });
 });
