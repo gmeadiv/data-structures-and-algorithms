@@ -68,8 +68,6 @@ class Graph {
         } else {continue}
       }
     }
-
-    console.log(visitedNodes.size, '<-- visited nodes --<<')
     return visitedNodes;
   }
 }
@@ -98,14 +96,21 @@ graph.addDirectedEdge(F, G);
 graph.addDirectedEdge(G, H);
 graph.addDirectedEdge(H, F);
 
-let list = Object.toString(graph.adjacencyList);
-
-console.log(list, '<-- list --<<');
-
 describe('Testing graph implementation', () => {
   test('It should be able to create a graph', () => {
 
     expect(graph.adjacencyList.size).toStrictEqual(8);
+
+  });
+
+  test('It should be able to return all the nodes in the graph', () => {
+
+    let results = graph.breadthFirst(A);
+
+    console.log(Object.toString(results), '<-- log');
+
+
+    expect(graph.breadthFirst(A)).toBe(new Set(8) {{"value": "A"}, {"value": "D"}, {"value": "C"}, {"value": "F"}, {"value": "E"}, {"value": "B"}, {"value": "G"}, {"value": "H"}});
 
   });
 });
