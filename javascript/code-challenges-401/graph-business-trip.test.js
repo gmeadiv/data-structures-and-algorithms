@@ -79,27 +79,19 @@ class Graph {
 
     let flightInfo = '';
 
-    if (costCeiling === null) {
-      this.adjacencyList.get(startVertex).map(edge => {
-        Object.values(edge).map((value) => {
-          if (costCeiling >= edge.weight) {
-            if (value.value === endVertex.value) {
-              flightInfo = [`True, $${edge.weight}`];
-            }
+    this.adjacencyList.get(startVertex).map(edge => {
+
+      Object.values(edge).map((value) => {
+        if (costCeiling >= edge.weight) {
+          if (value.value === endVertex.value) {
+            flightInfo = `True, $${edge.weight}`;
           }
-        });
+        } else {
+          flightInfo = `False, $${edge.weight}`;
+        }
       });
-    } else {
-      this.adjacencyList.get(startVertex).map(edge => {
-        Object.values(edge).map((value) => {
-          if (costCeiling >= edge.weight) {
-            if (value.value === endVertex.value) {
-              flightInfo = `True, $${edge.weight}`;
-            }
-          }
-        });
-      });
-    }
+
+    });
 
     return flightInfo;
   }
@@ -125,14 +117,21 @@ graph.addDirectedEdge(C, F, 26);
 graph.addDirectedEdge(D, F, 73);
 graph.addDirectedEdge(E, F, 250);
 
-describe('Testing graph implementation', () => {
+describe('Testing business trip function', () => {
 
-  test('It should be able to return all the nodes in the graph', () => {
+  test('It should be able to return true and the price of a ticket', () => {
 
-    // let results1 = graph.getFlightInfo([A, C]);
-    let results2 = graph.getFlightInfo([A, B], 200);
+    let results = graph.getFlightInfo([A, B], 200);
 
-    expect(results2).toBe('True, $150');
+    expect(results).toBe('True, $150');
+
+  });
+
+  test('It should be able to return false and the price of a ticket', () => {
+
+    let results = graph.getFlightInfo([A, B], 100);
+
+    expect(results).toBe('False, $150');
 
   });
 });
