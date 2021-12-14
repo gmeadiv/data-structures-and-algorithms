@@ -100,7 +100,6 @@ class Graph {
             }
           }
 
-          console.log(neighbor, '(neighbor equals column)', column, `vertex ${vertex}: `, row)
           index ++
         })
 
@@ -110,7 +109,7 @@ class Graph {
       matrix[vertex] = row;
     }
 
-    console.log(matrix, '<-- matrix --<<')
+    return matrix
   }
 }
 
@@ -127,18 +126,17 @@ graph.addDirectedEdge(A, E);
 graph.addDirectedEdge(B, C);
 graph.addDirectedEdge(B, D);
 graph.addDirectedEdge(C, D);
-graph.addDirectedEdge(C, E);
 graph.addDirectedEdge(D, E);
 
 describe('Testing graph implementation', () => {
 
-  test('It should be able to return all the nodes in the graph', () => {
+  test('It should be able to return a matrix of values and their connections', () => {
 
     let results = graph.getMatrix(A);
 
     console.log(JSON.stringify(results), '<-- result --<<');
 
-    expect(JSON.stringify(results)).toBe('[{"value":"A"},{"value":"B"},{"value":"C"},{"value":"G"},{"value":"D"},{"value":"E"},{"value":"F"},{"value":"H"}]');
+    expect(JSON.stringify(results)).toBe('{"A":[0,1,0,0,1],"B":[1,0,1,1,0],"C":[0,1,0,1,0],"D":[0,1,1,0,1],"E":[1,0,0,1,0]}');
 
   });
 });
