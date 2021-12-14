@@ -39,6 +39,8 @@ class Graph {
 
   getNeighbors(vertex) {
     if (!this.adjacencyList.has(vertex)) {
+
+      console.log(vertex, '<-- error --<<')
       throw new Error('get neighbor error');
     }
 
@@ -58,10 +60,56 @@ class Graph {
 
     }
 
-    let visitedNodesArray = []
-
+    const visitedNodesArray = []
     visitedNodes.forEach(value => { visitedNodesArray.push(value) })
+
     return visitedNodesArray;
+  }
+
+  getMatrix(startVertex) {
+
+    let columns = [];
+
+    const matrix = this.depthFirst(startVertex).reduce((accum, vertex, index) => {
+
+      let neighbors = this.getNeighbors(vertex).map(edge => {
+        return edge.vertex.value
+      })
+
+      columns[index] = vertex.value
+      columns.sort()
+      accum[vertex.value] = neighbors
+      
+      return accum
+    }, {}, 0)
+    
+    for (let [vertex, neighbors] of Object.entries(matrix)) {
+
+      let index = 0
+      let row = []
+
+      neighbors.map(neighbor => {
+        columns.map(column => {
+
+          if (neighbor === column) {
+            row[index] = 1
+          } else {
+
+            if (!row[index]) {
+              row[index] = 0;
+            }
+          }
+
+          index ++
+        })
+
+        index = 0
+      })
+
+      matrix[vertex] = row;
+    }
+
+    return matrix
   }
 }
 
@@ -72,29 +120,23 @@ let B = graph.addVertex('B');
 let C = graph.addVertex('C');
 let D = graph.addVertex('D');
 let E = graph.addVertex('E');
-let F = graph.addVertex('F');
-let G = graph.addVertex('G');
-let H = graph.addVertex('H');
 
 graph.addDirectedEdge(A, B);
-graph.addDirectedEdge(A, D);
+graph.addDirectedEdge(A, E);
 graph.addDirectedEdge(B, C);
 graph.addDirectedEdge(B, D);
-graph.addDirectedEdge(C, G);
+graph.addDirectedEdge(C, D);
 graph.addDirectedEdge(D, E);
-graph.addDirectedEdge(D, F);
-graph.addDirectedEdge(D, H);
-graph.addDirectedEdge(F, H);
 
 describe('Testing graph implementation', () => {
 
-  test('It should be able to return all the nodes in the graph', () => {
+  test('It should be able to return a matrix of values and their connections', () => {
 
-    let results = graph.depthFirst(A);
+    let results = graph.getMatrix(A);
 
-    console.log(JSON.stringify(results), '<-- log');
+    console.log(JSON.stringify(results), '<-- result --<<');
 
-    expect(JSON.stringify(results)).toBe('[{"value":"A"},{"value":"B"},{"value":"C"},{"value":"G"},{"value":"D"},{"value":"E"},{"value":"F"},{"value":"H"}]');
+    expect(JSON.stringify(results)).toBe('{"A":[0,1,0,0,1],"B":[1,0,1,1,0],"C":[0,1,0,1,0],"D":[0,1,1,0,1],"E":[1,0,0,1,0]}');
 
   });
 });
